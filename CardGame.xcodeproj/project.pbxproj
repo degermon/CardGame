@@ -58,12 +58,13 @@
 		652ECE1B2410199B004FFB23 /* CardGame */ = {
 			isa = PBXGroup;
 			children = (
-				652ECE3324102099004FFB23 /* Models */,
-				652ECE3024101ED4004FFB23 /* Controllers */,
-				652ECE35241020D5004FFB23 /* Storyboards */,
-				652ECE34241020B2004FFB23 /* Other */,
 				652ECE25241019A4004FFB23 /* Assets.xcassets */,
+				652ECE3024101ED4004FFB23 /* Controllers */,
 				652ECE2A241019A4004FFB23 /* Info.plist */,
+				652ECE3324102099004FFB23 /* Models */,
+				652ECE34241020B2004FFB23 /* Other */,
+				652ECE35241020D5004FFB23 /* Storyboards */,
+				652ECE382410263E004FFB23 /* ViewRelated */,
 			);
 			path = CardGame;
 			sourceTree = "<group>";
@@ -96,10 +97,17 @@
 		652ECE35241020D5004FFB23 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				652ECE222410199B004FFB23 /* Main.storyboard */,
 				652ECE27241019A4004FFB23 /* LaunchScreen.storyboard */,
+				652ECE222410199B004FFB23 /* Main.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		652ECE382410263E004FFB23 /* ViewRelated */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewRelated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

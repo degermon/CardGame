@@ -25,6 +25,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="backgroundView" destination="8bC-Xf-vdC" id="0Zn-ap-15U"/>
                         <segue destination="w4O-l6-L4r" kind="show" identifier="showSettings" id="S9m-ye-oAL"/>
                     </connections>
                 </viewController>
@@ -43,6 +44,9 @@
                         <viewLayoutGuide key="safeArea" id="but-36-MOO"/>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="0Rh-Mr-KRN"/>
+                    <connections>
+                        <outlet property="backgroundView" destination="zIE-3I-xZJ" id="H3A-JF-WRO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w1h-RU-P6d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
