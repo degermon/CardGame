@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  CardGame
 //
 //  Created by Daniel Šuškevič on 2020-03-04.
@@ -8,13 +8,16 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    
+    // - MARK: Actions
 
-
+    @IBAction func settingsButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "showSettings", sender: sender)
+    }
 }
-
