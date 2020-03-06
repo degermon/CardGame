@@ -16,25 +16,25 @@
                 <rect key="frame" x="0.0" y="0.0" width="80" height="120"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wyc-qv-V8O">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Si-qW-jtf">
                         <rect key="frame" x="0.0" y="0.0" width="80" height="120"/>
                         <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="60"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <connections>
+                            <action selector="buttonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Jb3-jl-dBy"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="Wyc-qv-V8O" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="7tw-nA-qqV"/>
-                <constraint firstAttribute="bottom" secondItem="Wyc-qv-V8O" secondAttribute="bottom" id="M4U-Qj-rBU"/>
-                <constraint firstAttribute="trailing" secondItem="Wyc-qv-V8O" secondAttribute="trailing" id="S3h-C4-jHS"/>
-                <constraint firstItem="Wyc-qv-V8O" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Wq6-dH-W7K"/>
+                <constraint firstItem="8Si-qW-jtf" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="1gZ-32-p9W"/>
+                <constraint firstAttribute="bottom" secondItem="8Si-qW-jtf" secondAttribute="bottom" id="WZc-50-Dw7"/>
+                <constraint firstItem="8Si-qW-jtf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Yd6-ds-1gg"/>
+                <constraint firstAttribute="trailing" secondItem="8Si-qW-jtf" secondAttribute="trailing" id="g5z-Wj-JpB"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="80" height="120"/>
             <connections>
-                <outlet property="cellLabel" destination="Wyc-qv-V8O" id="qPE-kP-h97"/>
+                <outlet property="cellButton" destination="8Si-qW-jtf" id="1Br-9G-UxX"/>
             </connections>
             <point key="canvasLocation" x="152.17391304347828" y="150.66964285714286"/>
         </collectionViewCell>

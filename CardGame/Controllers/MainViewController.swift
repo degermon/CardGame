@@ -67,11 +67,11 @@ class MainViewController: UIViewController {
         }
     }
     
-    func loadCardSymbols() {
+    private func loadCardSymbols() {
         symbolsForGame = CardSymbols.shared.getSymbols(difficulty: currentGameDifficulty)
     }
     
-    func setBackground() {
+    private func setBackground() {
         gradientLayer.frame = view.bounds
         gradientLayer.shouldRasterize = true
         gradientLayer.startPoint = CGPoint(x: 0, y: 0) // Top left corner.
@@ -79,7 +79,7 @@ class MainViewController: UIViewController {
         backgroundView.layer.insertSublayer(gradientLayer, at: 0)
     }
     
-    func selectBackgroundColor() {
+    private func selectBackgroundColor() {
         if currentGameDifficulty == false {
             gradientLayer.colors = [#colorLiteral(red: 0, green: 0.5725490196, blue: 0.2705882353, alpha: 1).cgColor, #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1).cgColor]
         } else {
@@ -87,10 +87,27 @@ class MainViewController: UIViewController {
         }
     }
     
+    private func configureCellDefaultState(cell: CardCollectionViewCell) {
+        cell.cellButton.setTitle("", for: .normal)
+        cell.cellButton.isEnabled = true
+        cell.cellButton.setBackgroundImage(CardGameSettings.shared.getCardBackImage(), for: .normal)
+    }
+    
+    private func configureClickedCellState(cell: CardCollectionViewCell, for indexPath: IndexPath) {
+        cell.cellButton?.titleLabel?.font =  .systemFont(ofSize: self.cardFontSize)
+        cell.cellButton.setTitle(self.symbolsForGame[indexPath.item], for: .normal)
+        cell.cellButton.setBackgroundImage(UIImage(), for: .normal)
+        cell.cellButton.isEnabled = false
+    }
+    
     // MARK: - Actions
 
     @IBAction func settingsButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: "showSettings", sender: sender)
+    }
+    
+    @IBAction func newGameButtonTapped(_ sender: Any) {
+        collectionView.reloadData()
     }
 }
 
@@ -107,12 +124,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return UICollectionViewCell()
         }
         
-        cell.cellLabel.font = cell.cellLabel.font.withSize(cardFontSize)
-        cell.cellLabel.text = symbolsForGame[indexPath.item]
+        configureCellDefaultState(cell: cell)
+        
+        cell.buttonAction = { [unowned self] in
+            self.configureClickedCellState(cell: cell, for: indexPath)
+        }
+        
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("\(symbolsForGame[indexPath.item])")
     }
 }

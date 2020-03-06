@@ -10,7 +10,9 @@ import UIKit
 
 class CardCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var cellLabel: UILabel!
+    @IBOutlet weak var cellButton: UIButton!
+    
+    var buttonAction : (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,5 +25,9 @@ class CardCollectionViewCell: UICollectionViewCell {
         self.layer.borderWidth = 1.0
         self.layer.borderColor = UIColor.red.cgColor
         self.layer.masksToBounds = true
+    }
+    
+    @IBAction func buttonTapped(_ sender: Any) {
+        buttonAction?()
     }
 }

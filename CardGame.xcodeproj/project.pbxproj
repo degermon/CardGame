@@ -10,6 +10,7 @@
 		6525E3E624116E0F0057A850 /* CardCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6525E3E424116E0F0057A850 /* CardCollectionCell.swift */; };
 		6525E3E724116E0F0057A850 /* CardCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6525E3E524116E0F0057A850 /* CardCollectionViewCell.xib */; };
 		6525E3E92411706F0057A850 /* CardSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6525E3E82411706F0057A850 /* CardSymbols.swift */; };
+		652C4F312412C6AA00D2E160 /* CardGameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652C4F302412C6AA00D2E160 /* CardGameSettings.swift */; };
 		652ECE1D2410199B004FFB23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652ECE1C2410199B004FFB23 /* AppDelegate.swift */; };
 		652ECE1F2410199B004FFB23 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652ECE1E2410199B004FFB23 /* SceneDelegate.swift */; };
 		652ECE212410199B004FFB23 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652ECE202410199B004FFB23 /* MainViewController.swift */; };
@@ -23,6 +24,7 @@
 		6525E3E424116E0F0057A850 /* CardCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionCell.swift; sourceTree = "<group>"; };
 		6525E3E524116E0F0057A850 /* CardCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardCollectionViewCell.xib; sourceTree = "<group>"; };
 		6525E3E82411706F0057A850 /* CardSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSymbols.swift; sourceTree = "<group>"; };
+		652C4F302412C6AA00D2E160 /* CardGameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGameSettings.swift; sourceTree = "<group>"; };
 		652ECE192410199B004FFB23 /* CardGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		652ECE1C2410199B004FFB23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		652ECE1E2410199B004FFB23 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				6525E3E82411706F0057A850 /* CardSymbols.swift */,
+				652C4F302412C6AA00D2E160 /* CardGameSettings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				6525E3E624116E0F0057A850 /* CardCollectionCell.swift in Sources */,
 				652ECE3224101F26004FFB23 /* SettingsViewController.swift in Sources */,
 				6525E3E92411706F0057A850 /* CardSymbols.swift in Sources */,
+				652C4F312412C6AA00D2E160 /* CardGameSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

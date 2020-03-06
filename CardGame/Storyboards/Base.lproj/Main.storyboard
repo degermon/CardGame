@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CMa-Ia-NAZ">
-                                <rect key="frame" x="20" y="64" width="374" height="622"/>
+                                <rect key="frame" x="20" y="64" width="374" height="602"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fft-Ed-Y3y">
                                     <size key="itemSize" width="50" height="50"/>
@@ -26,13 +26,23 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gS5-Ta-589">
+                                <rect key="frame" x="20" y="686" width="374" height="30"/>
+                                <state key="normal" title="New Game"/>
+                                <connections>
+                                    <action selector="newGameButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wjs-f1-EMp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="CMa-Ia-NAZ" secondAttribute="trailing" constant="20" id="2Jf-d0-SSf"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="CMa-Ia-NAZ" secondAttribute="bottom" constant="50" id="MRg-G5-ihc"/>
+                            <constraint firstItem="gS5-Ta-589" firstAttribute="top" secondItem="CMa-Ia-NAZ" secondAttribute="bottom" constant="20" id="FpR-Gp-vPd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gS5-Ta-589" secondAttribute="bottom" constant="20" id="Lap-uA-vND"/>
                             <constraint firstItem="CMa-Ia-NAZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Qrd-wa-vrW"/>
+                            <constraint firstItem="gS5-Ta-589" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="duQ-Nl-BIs"/>
                             <constraint firstItem="CMa-Ia-NAZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="fYj-ZV-Op8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gS5-Ta-589" secondAttribute="trailing" constant="20" id="q2c-Zj-Bz5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
