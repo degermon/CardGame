@@ -15,6 +15,7 @@ class MainViewController: UIViewController {
     
     private var currentGameDifficulty: Bool = false // false is easy, true is hard
     private let gradientLayer = CAGradientLayer()
+    let config = CollectionViewLayoutConfig()
     private var collectionViewFlowLayout: UICollectionViewFlowLayout!
     private let cellIdentifier = "CardCollectionViewCell"
     private var symbolsForGame: [String] = []
@@ -47,23 +48,8 @@ class MainViewController: UIViewController {
     
     private func setupCollectionViewCardSize() {
         if collectionViewFlowLayout == nil {
-            let numberOfItemPerRow: CGFloat = 4
-            let lineSpacing: CGFloat = 15
-            let interCardSpacing: CGFloat = 15
-            
-            let width = (collectionView.frame.width - (numberOfItemPerRow - 1) * interCardSpacing) / numberOfItemPerRow
-            let height = 1.5 * width
-            cardFontSize = width - 10
-            
-            collectionViewFlowLayout = UICollectionViewFlowLayout()
-            
-            collectionViewFlowLayout.itemSize = CGSize(width: width, height: height)
-            collectionViewFlowLayout.sectionInset = .zero
-            collectionViewFlowLayout.scrollDirection = .vertical
-            collectionViewFlowLayout.minimumLineSpacing = lineSpacing
-            collectionViewFlowLayout.minimumInteritemSpacing = interCardSpacing
-            
-            collectionView.setCollectionViewLayout(collectionViewFlowLayout, animated: true)
+            collectionViewFlowLayout = config.configureLayout(for: collectionView, itemPerRow: 4, lineSpacing: 15, interItemSpacing: 15)
+            cardFontSize = config.getSize()
         }
     }
     
@@ -107,6 +93,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func newGameButtonTapped(_ sender: Any) {
+        loadCardSymbols()
         collectionView.reloadData()
     }
 }
@@ -125,7 +112,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         
         configureCellDefaultState(cell: cell)
-        
         cell.buttonAction = { [unowned self] in
             self.configureClickedCellState(cell: cell, for: indexPath)
         }
