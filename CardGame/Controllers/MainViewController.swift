@@ -13,6 +13,7 @@ class MainViewController: UIViewController {
     @IBOutlet var backgroundView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    
     private let gradientLayer = CAGradientLayer()
     let config = CollectionViewLayoutConfig()
     private let checkMatchingCards = CheckMatchingCards()
@@ -101,7 +102,7 @@ class MainViewController: UIViewController {
             cardsTappedSymbolArray = [] // clear it, not needed after check
             checkTappedCardMatchResult(result: matchResult)
             
-        } else if currentGameDifficulty == true && cardsTappedSymbolArray.count == 3 { // hard match 3 pairs(triplets?)
+        } else if currentGameDifficulty == true && cardsTappedSymbolArray.count == 3 { // hard match 3 pairs(triples)
             
             let matchResult = checkMatchingCards.checkForMatch(cardsSymbolArray: cardsTappedSymbolArray)
             cardsTappedSymbolArray = [] // clear it, not needed after check
@@ -130,7 +131,7 @@ class MainViewController: UIViewController {
         performSegue(withIdentifier: "showSettings", sender: sender)
     }
     
-    @IBAction func newGameButtonTapped(_ sender: Any) {
+    @IBAction func newGameButtonTapped(_ sender: UIButton) {
         loadCardSymbols()
         collectionView.reloadData()
     }
