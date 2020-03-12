@@ -13,17 +13,20 @@ class MainViewController: UIViewController {
     @IBOutlet var backgroundView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var currentGameDifficulty: Bool = false // false is easy, true is hard
     private let gradientLayer = CAGradientLayer()
     let config = CollectionViewLayoutConfig()
+    private let checkMatchingCards = CheckMatchingCards()
     private var collectionViewFlowLayout: UICollectionViewFlowLayout!
+    private var currentGameDifficulty: Bool = false // false is easy, true is hard
     private let cellIdentifier = "CardCollectionViewCell"
     private var symbolsForGame: [String] = []
+    private var cardsTappedCellArray: [CardCollectionViewCell] = []
+    private var cardsTappedSymbolArray: [String] = []
     private var cardFontSize: CGFloat = 10.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setCollectionView()
+        setupCollectionView()
         setBackground()
         loadCardSymbols()
     }
@@ -39,7 +42,7 @@ class MainViewController: UIViewController {
     
     // MARK: - Config
     
-    private func setCollectionView() {
+    private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
         let nib = UINib(nibName: "CardCollectionViewCell", bundle: nil)
@@ -84,6 +87,41 @@ class MainViewController: UIViewController {
         cell.cellButton.setTitle(self.symbolsForGame[indexPath.item], for: .normal)
         cell.cellButton.setBackgroundImage(UIImage(), for: .normal)
         cell.cellButton.isEnabled = false
+        cardsTappedCellArray.append(cell)
+        cardsTappedSymbolArray.append(self.symbolsForGame[indexPath.item])
+        matchTappedCards()
+    }
+    
+    // MARK: - Card Check
+    
+    private func matchTappedCards() {
+        if currentGameDifficulty == false && cardsTappedSymbolArray.count == 2 { // easy match 2 pairs
+            
+            let matchResult = checkMatchingCards.checkForMatch(cardsSymbolArray: cardsTappedSymbolArray)
+            cardsTappedSymbolArray = [] // clear it, not needed after check
+            checkTappedCardMatchResult(result: matchResult)
+            
+        } else if currentGameDifficulty == true && cardsTappedSymbolArray.count == 3 { // hard match 3 pairs(triplets?)
+            
+            let matchResult = checkMatchingCards.checkForMatch(cardsSymbolArray: cardsTappedSymbolArray)
+            cardsTappedSymbolArray = [] // clear it, not needed after check
+            checkTappedCardMatchResult(result: matchResult)
+        }
+    }
+    
+    private func checkTappedCardMatchResult(result: Bool) {
+        if result == true { // cards match
+            for item in cardsTappedCellArray {
+                item.alpha = 0.4
+            }
+        } else {
+            for item in cardsTappedCellArray {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.configureCellDefaultState(cell: item)
+                }
+            }
+        }
+        cardsTappedCellArray = []
     }
     
     // MARK: - Actions
