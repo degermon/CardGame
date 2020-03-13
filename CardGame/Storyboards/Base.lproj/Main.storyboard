@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CMa-Ia-NAZ">
-                                <rect key="frame" x="20" y="64" width="374" height="602"/>
+                                <rect key="frame" x="20" y="64" width="374" height="581.66666666666663"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fft-Ed-Y3y">
                                     <size key="itemSize" width="50" height="50"/>
@@ -34,16 +34,25 @@
                                     <action selector="newGameButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wjs-f1-EMp"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Score: 0" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uBs-Qv-005">
+                                <rect key="frame" x="15" y="655.66666666666663" width="384" height="20.333333333333371"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="CMa-Ia-NAZ" secondAttribute="trailing" constant="20" id="2Jf-d0-SSf"/>
-                            <constraint firstItem="gS5-Ta-589" firstAttribute="top" secondItem="CMa-Ia-NAZ" secondAttribute="bottom" constant="20" id="FpR-Gp-vPd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gS5-Ta-589" secondAttribute="bottom" constant="20" id="Lap-uA-vND"/>
                             <constraint firstItem="CMa-Ia-NAZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Qrd-wa-vrW"/>
+                            <constraint firstItem="gS5-Ta-589" firstAttribute="top" secondItem="uBs-Qv-005" secondAttribute="bottom" constant="10" id="RvW-mN-Bm3"/>
+                            <constraint firstItem="uBs-Qv-005" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="Vhm-lm-72q"/>
                             <constraint firstItem="gS5-Ta-589" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="duQ-Nl-BIs"/>
                             <constraint firstItem="CMa-Ia-NAZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="fYj-ZV-Op8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="uBs-Qv-005" secondAttribute="trailing" constant="15" id="nVo-xC-sxQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gS5-Ta-589" secondAttribute="trailing" constant="20" id="q2c-Zj-Bz5"/>
+                            <constraint firstItem="uBs-Qv-005" firstAttribute="top" secondItem="CMa-Ia-NAZ" secondAttribute="bottom" constant="10" id="wZR-lx-Ns4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -57,12 +66,13 @@
                     <connections>
                         <outlet property="backgroundView" destination="8bC-Xf-vdC" id="0Zn-ap-15U"/>
                         <outlet property="collectionView" destination="CMa-Ia-NAZ" id="9Pg-Pp-jPF"/>
+                        <outlet property="scoreLabel" destination="uBs-Qv-005" id="pPH-jv-DUz"/>
                         <segue destination="w4O-l6-L4r" kind="show" identifier="showSettings" id="S9m-ye-oAL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1042.0289855072465" y="116.51785714285714"/>
+            <point key="canvasLocation" x="1042.0289855072465" y="115.7608695652174"/>
         </scene>
         <!--Settings-->
         <scene sceneID="mrg-Y9-Psp">
@@ -72,23 +82,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0UM-YR-Fjn">
-                                <rect key="frame" x="15" y="98" width="384" height="208"/>
-                            </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game difficulty" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLt-yl-Cx9">
                                 <rect key="frame" x="15" y="59" width="384" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="N0k-8E-gMg">
+                                <rect key="frame" x="15" y="59" width="384" height="216"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0W-Ip-NVy">
+                                        <rect key="frame" x="0.0" y="98" width="84" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0UM-YR-Fjn">
+                                        <rect key="frame" x="104" y="0.0" width="280" height="216"/>
+                                    </pickerView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="p0W-Ip-NVy" firstAttribute="width" secondItem="0UM-YR-Fjn" secondAttribute="width" multiplier="0.3" id="MOn-zr-c1z"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="0UM-YR-Fjn" firstAttribute="top" secondItem="MLt-yl-Cx9" secondAttribute="bottom" constant="15" id="Q4z-Fv-DKg"/>
-                            <constraint firstItem="0UM-YR-Fjn" firstAttribute="trailing" secondItem="but-36-MOO" secondAttribute="trailing" constant="-15" id="QZX-si-Zy5"/>
+                            <constraint firstAttribute="trailing" secondItem="N0k-8E-gMg" secondAttribute="trailing" constant="15" id="3PS-9i-X7Z"/>
                             <constraint firstItem="MLt-yl-Cx9" firstAttribute="leading" secondItem="but-36-MOO" secondAttribute="leading" constant="15" id="XJg-1m-kUF"/>
+                            <constraint firstItem="N0k-8E-gMg" firstAttribute="leading" secondItem="but-36-MOO" secondAttribute="leading" constant="15" id="c3i-Wz-pk9"/>
                             <constraint firstItem="MLt-yl-Cx9" firstAttribute="top" secondItem="but-36-MOO" secondAttribute="top" constant="15" id="eTS-N7-Kcg"/>
-                            <constraint firstItem="0UM-YR-Fjn" firstAttribute="leading" secondItem="but-36-MOO" secondAttribute="leading" constant="15" id="qbr-wj-UFh"/>
+                            <constraint firstItem="N0k-8E-gMg" firstAttribute="top" secondItem="but-36-MOO" secondAttribute="top" constant="15" id="qTZ-7A-0ob"/>
                             <constraint firstItem="but-36-MOO" firstAttribute="trailing" secondItem="MLt-yl-Cx9" secondAttribute="trailing" constant="15" id="uYu-g7-Fu3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="but-36-MOO"/>

@@ -26,19 +26,19 @@ class CardSymbols {
     }
     
     private func symbolsForEasyGame() -> [String] {
-        var symbolsForGame: [String] = Array(symbols.shuffled().prefix(8)) // get 8 symbol pairs for array
+        var symbolsForGame: [String] = Array(symbols.shuffled().prefix(8))
         symbolsForGame += symbolsForGame // make it double (pairs)
         return symbolsForGame.shuffled()
     }
     
     private func symbolsForNormalGame() -> [String] {
-        var symbolsForGame: [String] = Array(symbols.shuffled().prefix(5)) // get 5 symbol for array
+        var symbolsForGame: [String] = Array(symbols.shuffled().prefix(5))
         symbolsForGame += symbolsForGame + symbolsForGame// make it triple (pairs)
         return symbolsForGame.shuffled()
     }
     
     private func symbolsForHardGame() -> [String] {
-        var symbolsForGame: [String] = Array(symbols.shuffled().prefix(6)) // get 6 symbols for array
+        var symbolsForGame: [String] = Array(symbols.shuffled().prefix(6))
         symbolsForGame += symbolsForGame + symbolsForGame + symbolsForGame // make it quadruplet (pairs)
         return symbolsForGame.shuffled()
     }

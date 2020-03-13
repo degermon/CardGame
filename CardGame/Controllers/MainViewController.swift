@@ -12,7 +12,7 @@ class MainViewController: UIViewController {
     
     @IBOutlet var backgroundView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
-    
+    @IBOutlet weak var scoreLabel: UILabel!
     
     private let gradientLayer = CAGradientLayer()
     let config = CollectionViewLayoutConfig()
@@ -33,14 +33,7 @@ class MainViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        checkGameDifficulty()
-        selectBackgroundColor()
-        updateColelctionViewLayout()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        //setupCollectionViewCardSize()
+        newGame()
     }
     
     // MARK: - Config
@@ -61,18 +54,33 @@ class MainViewController: UIViewController {
     }
     
     private func updateColelctionViewLayout() {
-        if currentGameDifficulty == "Hard" {
-            collectionViewFlowLayout = config.configureLayout(for: collectionView, itemPerRow: 5, lineSpacing: 15, interItemSpacing: 15)
-        } else {
+        if currentGameDifficulty == "Easy" {
             collectionViewFlowLayout = config.configureLayout(for: collectionView, itemPerRow: 4, lineSpacing: 15, interItemSpacing: 15)
+        } else if currentGameDifficulty == "Normal" {
+            collectionViewFlowLayout = config.configureLayout(for: collectionView, itemPerRow: 4, lineSpacing: 15, interItemSpacing: 15)
+        } else {
+            collectionViewFlowLayout = config.configureLayout(for: collectionView, itemPerRow: 5, lineSpacing: 15, interItemSpacing: 15)
         }
         getCardFontSize()
-        loadCardSymbols()
-        collectionView.reloadData()
     }
     
     private func loadCardSymbols() {
         symbolsForGame = CardSymbols.shared.getSymbols(difficulty: currentGameDifficulty)
+    }
+    
+    private func newGame() {
+        checkGameDifficulty()
+        selectBackgroundColor()
+        updateColelctionViewLayout()
+        loadCardSymbols()
+        GameScore.shared.clearScore()
+        updateScoreLabel()
+        for item in cardsTappedCellArray {
+            configureCellDefaultState(cell: item)
+        }
+        collectionView.reloadData()
+        cardsTappedCellArray = []
+        cardsTappedSymbolArray = []
     }
     
     private func setBackground() {
@@ -93,6 +101,10 @@ class MainViewController: UIViewController {
         }
     }
     
+    private func updateScoreLabel() {
+        scoreLabel.text = "Current Score: \(GameScore.shared.getCurrentScoreFor(difficulty: currentGameDifficulty))"
+    }
+    
     private func configureCellDefaultState(cell: CardCollectionViewCell) {
         cell.cellButton.setTitle("", for: .normal)
         cell.cellButton.isEnabled = true
@@ -109,25 +121,36 @@ class MainViewController: UIViewController {
         matchTappedCards()
     }
     
+    func checkForChanges() {
+        if currentGameDifficulty != CardGameSettings.shared.checkDifficulty() {
+            newGame()
+        }
+    }
+    
     // MARK: - Card Check
     
     private func matchTappedCards() {
-        if currentGameDifficulty == "Easy" && cardsTappedSymbolArray.count == 2 { // easy match 2 pairs
-            
-            let matchResult = checkMatchingCards.checkForMatch(cardsSymbolArray: cardsTappedSymbolArray)
-            cardsTappedSymbolArray = [] // clear it, not needed after check
-            checkTappedCardMatchResult(result: matchResult)
-        
-        } else if currentGameDifficulty == "Normal" && cardsTappedSymbolArray.count == 3 { // normal match 3 pairs (triplets)
-            let matchResult = checkMatchingCards.checkForMatch(cardsSymbolArray: cardsTappedSymbolArray)
-            cardsTappedSymbolArray = [] // clear it, not needed after check
-            checkTappedCardMatchResult(result: matchResult)
-            
-        } else if currentGameDifficulty == "Hard" && cardsTappedSymbolArray.count == 4 { // hard match 4 pairs(quadralupet)
-            
-            let matchResult = checkMatchingCards.checkForMatch(cardsSymbolArray: cardsTappedSymbolArray)
-            cardsTappedSymbolArray = [] // clear it, not needed after check
-            checkTappedCardMatchResult(result: matchResult)
+        switch currentGameDifficulty {
+        case "Easy": // easy match 2 pairs
+            if cardsTappedSymbolArray.count == 2 {
+                let matchResult = checkMatchingCards.checkForMatch(cardsSymbolArray: cardsTappedSymbolArray)
+                cardsTappedSymbolArray = [] // clear it, not needed after check
+                checkTappedCardMatchResult(result: matchResult)
+            }
+        case "Normal": // normal match 3 pairs (triplets)
+            if cardsTappedSymbolArray.count == 3 {
+                let matchResult = checkMatchingCards.checkForMatch(cardsSymbolArray: cardsTappedSymbolArray)
+                cardsTappedSymbolArray = [] // clear it, not needed after check
+                checkTappedCardMatchResult(result: matchResult)
+            }
+        case "Hard": // hard match 4 pairs(quadralupet)
+            if cardsTappedSymbolArray.count == 4 {
+                let matchResult = checkMatchingCards.checkForMatch(cardsSymbolArray: cardsTappedSymbolArray)
+                cardsTappedSymbolArray = [] // clear it, not needed after check
+                checkTappedCardMatchResult(result: matchResult)
+            }
+        default:
+            break
         }
     }
     
@@ -143,7 +166,9 @@ class MainViewController: UIViewController {
                 }
             }
         }
-        cardsTappedCellArray = []
+        GameScore.shared.updateScoreFor(difficulty: currentGameDifficulty, by: result)
+        updateScoreLabel()
+        cardsTappedCellArray = [] // clear
     }
     
     // MARK: - Actions
@@ -153,8 +178,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func newGameButtonTapped(_ sender: UIButton) {
-        loadCardSymbols()
-        collectionView.reloadData()
+        newGame()
     }
 }
 
