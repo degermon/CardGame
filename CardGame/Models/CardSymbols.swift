@@ -16,6 +16,8 @@ class CardSymbols {
         switch difficulty {
         case "Easy":
             return symbolsForEasyGame()
+        case "Normal":
+            return symbolsForNormalGame()
         case "Hard":
             return symbolsForHardGame()
         default:
@@ -29,9 +31,15 @@ class CardSymbols {
         return symbolsForGame.shuffled()
     }
     
-    private func symbolsForHardGame() -> [String] {
-        var symbolsForGame: [String] = Array(symbols.shuffled().prefix(5)) // get 5 symbol triples for array
+    private func symbolsForNormalGame() -> [String] {
+        var symbolsForGame: [String] = Array(symbols.shuffled().prefix(5)) // get 5 symbol for array
         symbolsForGame += symbolsForGame + symbolsForGame// make it triple (pairs)
+        return symbolsForGame.shuffled()
+    }
+    
+    private func symbolsForHardGame() -> [String] {
+        var symbolsForGame: [String] = Array(symbols.shuffled().prefix(6)) // get 6 symbols for array
+        symbolsForGame += symbolsForGame + symbolsForGame + symbolsForGame // make it quadruplet (pairs)
         return symbolsForGame.shuffled()
     }
 }

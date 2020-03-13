@@ -35,11 +35,12 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         checkGameDifficulty()
         selectBackgroundColor()
+        updateColelctionViewLayout()
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        setupCollectionViewCardSize()
+        //setupCollectionViewCardSize()
     }
     
     // MARK: - Config
@@ -55,11 +56,19 @@ class MainViewController: UIViewController {
         collectionView.register(nib, forCellWithReuseIdentifier: cellIdentifier)
     }
     
-    private func setupCollectionViewCardSize() {
-        if collectionViewFlowLayout == nil {
+    private func getCardFontSize() {
+        cardFontSize = config.getSize()
+    }
+    
+    private func updateColelctionViewLayout() {
+        if currentGameDifficulty == "Hard" {
+            collectionViewFlowLayout = config.configureLayout(for: collectionView, itemPerRow: 5, lineSpacing: 15, interItemSpacing: 15)
+        } else {
             collectionViewFlowLayout = config.configureLayout(for: collectionView, itemPerRow: 4, lineSpacing: 15, interItemSpacing: 15)
-            cardFontSize = config.getSize()
         }
+        getCardFontSize()
+        loadCardSymbols()
+        collectionView.reloadData()
     }
     
     private func loadCardSymbols() {
@@ -77,8 +86,10 @@ class MainViewController: UIViewController {
     private func selectBackgroundColor() {
         if currentGameDifficulty == "Easy" {
             gradientLayer.colors = [#colorLiteral(red: 0, green: 0.5725490196, blue: 0.2705882353, alpha: 1).cgColor, #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1).cgColor]
+        } else if currentGameDifficulty == "Normal" {
+            gradientLayer.colors = [#colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1).cgColor, #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1).cgColor]
         } else {
-            gradientLayer.colors = [#colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1).cgColor, #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).cgColor]
+            gradientLayer.colors = [#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1).cgColor, #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).cgColor]
         }
     }
     
@@ -106,8 +117,13 @@ class MainViewController: UIViewController {
             let matchResult = checkMatchingCards.checkForMatch(cardsSymbolArray: cardsTappedSymbolArray)
             cardsTappedSymbolArray = [] // clear it, not needed after check
             checkTappedCardMatchResult(result: matchResult)
+        
+        } else if currentGameDifficulty == "Normal" && cardsTappedSymbolArray.count == 3 { // normal match 3 pairs (triplets)
+            let matchResult = checkMatchingCards.checkForMatch(cardsSymbolArray: cardsTappedSymbolArray)
+            cardsTappedSymbolArray = [] // clear it, not needed after check
+            checkTappedCardMatchResult(result: matchResult)
             
-        } else if currentGameDifficulty == "Hard" && cardsTappedSymbolArray.count == 3 { // hard match 3 pairs(triples)
+        } else if currentGameDifficulty == "Hard" && cardsTappedSymbolArray.count == 4 { // hard match 4 pairs(quadralupet)
             
             let matchResult = checkMatchingCards.checkForMatch(cardsSymbolArray: cardsTappedSymbolArray)
             cardsTappedSymbolArray = [] // clear it, not needed after check
