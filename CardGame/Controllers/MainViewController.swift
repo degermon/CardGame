@@ -33,6 +33,9 @@ class MainViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        checkGameDifficulty()
+        selectBackgroundColor()
+        updateColelctionViewLayout()
         newGame()
     }
     
@@ -69,9 +72,6 @@ class MainViewController: UIViewController {
     }
     
     private func newGame() {
-        checkGameDifficulty()
-        selectBackgroundColor()
-        updateColelctionViewLayout()
         loadCardSymbols()
         GameScore.shared.clearScore()
         updateScoreLabel()
