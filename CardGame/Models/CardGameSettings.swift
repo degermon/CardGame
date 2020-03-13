@@ -11,14 +11,14 @@ import UIKit
 class CardGameSettings {
     static let shared = CardGameSettings()
     
-    private var gameDifficulty: Bool = false // false - easy, true - hard
+    private var gameDifficulty: String = "Easy" // Easy by default
     private var cardBackImage = UIImage(named: "tarrotCardBack") // first default value
     
-    func setDifficulty(difficulty: Bool) {
+    func setDifficulty(difficulty: String) {
         gameDifficulty = difficulty
     }
     
-    func checkDifficulty() -> Bool {
+    func checkDifficulty() -> String {
         return gameDifficulty
     }
     

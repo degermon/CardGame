@@ -18,7 +18,7 @@ class MainViewController: UIViewController {
     let config = CollectionViewLayoutConfig()
     private let checkMatchingCards = CheckMatchingCards()
     private var collectionViewFlowLayout: UICollectionViewFlowLayout!
-    private var currentGameDifficulty: Bool = false // false is easy, true is hard
+    private var currentGameDifficulty: String = ""
     private let cellIdentifier = "CardCollectionViewCell"
     private var symbolsForGame: [String] = []
     private var cardsTappedCellArray: [CardCollectionViewCell] = []
@@ -33,6 +33,7 @@ class MainViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        checkGameDifficulty()
         selectBackgroundColor()
     }
     
@@ -42,6 +43,10 @@ class MainViewController: UIViewController {
     }
     
     // MARK: - Config
+    
+    private func checkGameDifficulty() {
+        currentGameDifficulty = CardGameSettings.shared.checkDifficulty()
+    }
     
     private func setupCollectionView() {
         collectionView.delegate = self
@@ -70,7 +75,7 @@ class MainViewController: UIViewController {
     }
     
     private func selectBackgroundColor() {
-        if currentGameDifficulty == false {
+        if currentGameDifficulty == "Easy" {
             gradientLayer.colors = [#colorLiteral(red: 0, green: 0.5725490196, blue: 0.2705882353, alpha: 1).cgColor, #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1).cgColor]
         } else {
             gradientLayer.colors = [#colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1).cgColor, #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).cgColor]
@@ -96,13 +101,13 @@ class MainViewController: UIViewController {
     // MARK: - Card Check
     
     private func matchTappedCards() {
-        if currentGameDifficulty == false && cardsTappedSymbolArray.count == 2 { // easy match 2 pairs
+        if currentGameDifficulty == "Easy" && cardsTappedSymbolArray.count == 2 { // easy match 2 pairs
             
             let matchResult = checkMatchingCards.checkForMatch(cardsSymbolArray: cardsTappedSymbolArray)
             cardsTappedSymbolArray = [] // clear it, not needed after check
             checkTappedCardMatchResult(result: matchResult)
             
-        } else if currentGameDifficulty == true && cardsTappedSymbolArray.count == 3 { // hard match 3 pairs(triples)
+        } else if currentGameDifficulty == "Hard" && cardsTappedSymbolArray.count == 3 { // hard match 3 pairs(triples)
             
             let matchResult = checkMatchingCards.checkForMatch(cardsSymbolArray: cardsTappedSymbolArray)
             cardsTappedSymbolArray = [] // clear it, not needed after check

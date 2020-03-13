@@ -12,11 +12,13 @@ class CardSymbols {
     static let shared = CardSymbols()
     private var symbols = ["👺", "🤮", "🤑", "🎃", "🤒", "👀", "🧠", "🧑🏻‍🎤", "💧", "👿", "👽", "☠️", "🤡", "🧶", "🐸", "🌍"]
     
-    func getSymbols(difficulty: Bool) -> [String] {
+    func getSymbols(difficulty: String) -> [String] {
         switch difficulty {
-        case true:
+        case "Easy":
+            return symbolsForEasyGame()
+        case "Hard":
             return symbolsForHardGame()
-        case false:
+        default:
             return symbolsForEasyGame()
         }
     }
