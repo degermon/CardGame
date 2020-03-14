@@ -15,6 +15,7 @@
 		652C4F37241AA5D200D2E160 /* CheckMatchingCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652C4F36241AA5D200D2E160 /* CheckMatchingCards.swift */; };
 		652C4F3D241ABB1900D2E160 /* RoundedButon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652C4F3C241ABB1900D2E160 /* RoundedButon.swift */; };
 		652C4F3F241BBEDE00D2E160 /* GameScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652C4F3E241BBEDE00D2E160 /* GameScore.swift */; };
+		652C4F41241D662800D2E160 /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652C4F40241D662800D2E160 /* PickerTableViewCell.swift */; };
 		652ECE1D2410199B004FFB23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652ECE1C2410199B004FFB23 /* AppDelegate.swift */; };
 		652ECE1F2410199B004FFB23 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652ECE1E2410199B004FFB23 /* SceneDelegate.swift */; };
 		652ECE212410199B004FFB23 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652ECE202410199B004FFB23 /* MainViewController.swift */; };
@@ -33,6 +34,7 @@
 		652C4F36241AA5D200D2E160 /* CheckMatchingCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMatchingCards.swift; sourceTree = "<group>"; };
 		652C4F3C241ABB1900D2E160 /* RoundedButon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButon.swift; sourceTree = "<group>"; };
 		652C4F3E241BBEDE00D2E160 /* GameScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScore.swift; sourceTree = "<group>"; };
+		652C4F40241D662800D2E160 /* PickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
 		652ECE192410199B004FFB23 /* CardGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		652ECE1C2410199B004FFB23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		652ECE1E2410199B004FFB23 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				6525E3E424116E0F0057A850 /* CardCollectionCell.swift */,
 				6525E3E524116E0F0057A850 /* CardCollectionViewCell.xib */,
 				652C4F3C241ABB1900D2E160 /* RoundedButon.swift */,
+				652C4F40241D662800D2E160 /* PickerTableViewCell.swift */,
 			);
 			path = ViewRelated;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				652ECE212410199B004FFB23 /* MainViewController.swift in Sources */,
+				652C4F41241D662800D2E160 /* PickerTableViewCell.swift in Sources */,
 				652C4F3F241BBEDE00D2E160 /* GameScore.swift in Sources */,
 				652ECE1D2410199B004FFB23 /* AppDelegate.swift in Sources */,
 				652C4F3D241ABB1900D2E160 /* RoundedButon.swift in Sources */,

@@ -88,31 +88,34 @@
                                 <color key="textColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="N0k-8E-gMg">
-                                <rect key="frame" x="15" y="59" width="384" height="216"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0W-Ip-NVy">
-                                        <rect key="frame" x="0.0" y="98" width="84" height="20.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0UM-YR-Fjn">
-                                        <rect key="frame" x="104" y="0.0" width="280" height="216"/>
-                                    </pickerView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="p0W-Ip-NVy" firstAttribute="width" secondItem="0UM-YR-Fjn" secondAttribute="width" multiplier="0.3" id="MOn-zr-c1z"/>
-                                </constraints>
-                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="10M-TZ-Mkj" customClass="RoundedButon" customModule="CardGame" customModuleProvider="target">
+                                <rect key="frame" x="171.66666666666663" y="98" width="227.33333333333337" height="30"/>
+                                <color key="backgroundColor" red="0.97448861750000004" green="0.42365656568183141" blue="0.38881613514575691" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="difficultyButtonTapped:" destination="w4O-l6-L4r" eventType="touchUpInside" id="zNf-mb-XAt"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0W-Ip-NVy">
+                                <rect key="frame" x="15" y="98" width="136.66666666666666" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="N0k-8E-gMg" secondAttribute="trailing" constant="15" id="3PS-9i-X7Z"/>
+                            <constraint firstItem="p0W-Ip-NVy" firstAttribute="leading" secondItem="but-36-MOO" secondAttribute="leading" constant="15" id="DcT-Aq-HzX"/>
+                            <constraint firstItem="p0W-Ip-NVy" firstAttribute="top" secondItem="MLt-yl-Cx9" secondAttribute="bottom" constant="15" id="Jm8-la-x1G"/>
+                            <constraint firstItem="10M-TZ-Mkj" firstAttribute="leading" secondItem="p0W-Ip-NVy" secondAttribute="trailing" constant="20" id="Kkj-dj-Ai3"/>
+                            <constraint firstItem="10M-TZ-Mkj" firstAttribute="top" secondItem="MLt-yl-Cx9" secondAttribute="bottom" constant="15" id="TrN-Vs-vf1"/>
+                            <constraint firstItem="p0W-Ip-NVy" firstAttribute="height" secondItem="10M-TZ-Mkj" secondAttribute="height" id="V5E-eW-ecG"/>
                             <constraint firstItem="MLt-yl-Cx9" firstAttribute="leading" secondItem="but-36-MOO" secondAttribute="leading" constant="15" id="XJg-1m-kUF"/>
-                            <constraint firstItem="N0k-8E-gMg" firstAttribute="leading" secondItem="but-36-MOO" secondAttribute="leading" constant="15" id="c3i-Wz-pk9"/>
                             <constraint firstItem="MLt-yl-Cx9" firstAttribute="top" secondItem="but-36-MOO" secondAttribute="top" constant="15" id="eTS-N7-Kcg"/>
-                            <constraint firstItem="N0k-8E-gMg" firstAttribute="top" secondItem="but-36-MOO" secondAttribute="top" constant="15" id="qTZ-7A-0ob"/>
+                            <constraint firstItem="but-36-MOO" firstAttribute="trailing" secondItem="10M-TZ-Mkj" secondAttribute="trailing" constant="15" id="fNE-af-MuJ"/>
+                            <constraint firstItem="p0W-Ip-NVy" firstAttribute="width" secondItem="10M-TZ-Mkj" secondAttribute="width" multiplier="0.6" id="jcI-Xo-zQR"/>
                             <constraint firstItem="but-36-MOO" firstAttribute="trailing" secondItem="MLt-yl-Cx9" secondAttribute="trailing" constant="15" id="uYu-g7-Fu3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="but-36-MOO"/>
@@ -120,7 +123,7 @@
                     <navigationItem key="navigationItem" title="Settings" id="0Rh-Mr-KRN"/>
                     <connections>
                         <outlet property="backgroundView" destination="zIE-3I-xZJ" id="H3A-JF-WRO"/>
-                        <outlet property="pickerView" destination="0UM-YR-Fjn" id="it5-A3-qgp"/>
+                        <outlet property="difficultyButton" destination="10M-TZ-Mkj" id="TcT-ti-pHN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w1h-RU-P6d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

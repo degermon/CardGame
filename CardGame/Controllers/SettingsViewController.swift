@@ -11,15 +11,18 @@ import UIKit
 class SettingsViewController: UIViewController {
     
     @IBOutlet var backgroundView: UIView!
-    @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var difficultyButton: UIButton!
     
     private let gradientLayer = CAGradientLayer()
+    private let transparentView = UIView()
+    private let tableView = UITableView()
+    private var selectedButton = UIButton() // used later in animations
     private let gameDifficulties = ["Easy", "Normal", "Hard"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackground()
-        setupPickerView()
+        setupTableView()
         checkGameDifficulty()
     }
     
@@ -34,36 +37,76 @@ class SettingsViewController: UIViewController {
         backgroundView.layer.insertSublayer(gradientLayer, at: 0)
     }
     
-    func setupPickerView() {
-        pickerView.delegate = self
-        pickerView.dataSource = self
+    func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(PickerTableViewCell.self, forCellReuseIdentifier: "pickerTableViewCell")
     }
     
-     private func checkGameDifficulty() {
+    private func checkGameDifficulty() {
         let currentGameDifficulty = CardGameSettings.shared.checkDifficulty()
-        guard let indexOfDifficulty = gameDifficulties.firstIndex(of: currentGameDifficulty) else {
-            return
-        }
-        pickerView.selectRow(indexOfDifficulty, inComponent: 0, animated: true)
+        difficultyButton.setTitle(currentGameDifficulty, for: .normal)
+    }
+    
+    // MARK: - DropDown Picker configuration
+    
+    func addTransparentView() { // add darked background when it is called
+        let frame = selectedButton.frame
+        let window = UIApplication.shared.keyWindow // now using/supporting multiple scenes, so warning can be ignored
+        transparentView.frame = window?.frame ?? self.view.frame
+        self.view.addSubview(transparentView)
+        transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        
+        tableView.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width + frame.height, height: 0)
+        self.view.addSubview(tableView)
+        tableView.layer.cornerRadius = 5
+        tableView.isScrollEnabled = false
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeTransparentView)) // when tapped on darker background call and remove it
+        transparentView.addGestureRecognizer(tapGesture)
+        
+        transparentView.alpha = 0
+        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.transparentView.alpha = 0.5
+            self.tableView.frame = CGRect(x: frame.origin.x, y: frame.origin.y + frame.height + 5, width: frame.width, height: CGFloat(self.gameDifficulties.count * 43))
+        }, completion: nil) // added animation for better view
+    }
+    
+    @objc func removeTransparentView() { // added animation for better view
+        let frame = selectedButton.frame
+        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.transparentView.alpha = 0
+            self.tableView.frame = CGRect(x: frame.origin.x, y: frame.origin.y + frame.height, width: frame.width, height: 0)
+        }, completion: nil)
+    }
+    
+    // MARK: - Actions
+        
+    @IBAction func difficultyButtonTapped(_ sender: Any) {
+        selectedButton = difficultyButton
+        addTransparentView()
     }
 }
 
-// MARK: - PickerView Extension
+// MARK: - TableView Extension
 
-extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return gameDifficulties.count
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return gameDifficulties[row]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "pickerTableViewCell", for: indexPath)
+        cell.textLabel?.text = gameDifficulties[indexPath.row]
+        
+        return cell
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        CardGameSettings.shared.setDifficulty(difficulty: gameDifficulties[row])
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let chosenDifficulty = gameDifficulties[indexPath.row]
+        CardGameSettings.shared.setDifficulty(difficulty: chosenDifficulty)
+        checkGameDifficulty()
+        removeTransparentView()
     }
 }
