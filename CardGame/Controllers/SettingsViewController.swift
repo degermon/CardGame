@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol SettingsVCDelegate: class {
+    func updateCards()
+}
+
 class SettingsViewController: UIViewController {
     
     @IBOutlet var backgroundView: UIView!
@@ -18,6 +22,7 @@ class SettingsViewController: UIViewController {
     private let tableView = UITableView()
     private var selectedButton = UIButton() // used later in animations
     private let gameDifficulties = ["Easy", "Normal", "Hard"]
+    weak var delegate: SettingsVCDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,13 +55,14 @@ class SettingsViewController: UIViewController {
     
     // MARK: - DropDown Picker configuration
     
-    func addTransparentView() { // add darked background when it is called
+    func addTransparentView() { // add darked background and table view when it is called
         let frame = selectedButton.frame
         let window = UIApplication.shared.keyWindow // now using/supporting multiple scenes, so warning can be ignored
         transparentView.frame = window?.frame ?? self.view.frame
         self.view.addSubview(transparentView)
         transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
         
+        // table view setup
         tableView.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width + frame.height, height: 0)
         self.view.addSubview(tableView)
         tableView.layer.cornerRadius = 5
@@ -108,5 +114,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         CardGameSettings.shared.setDifficulty(difficulty: chosenDifficulty)
         checkGameDifficulty()
         removeTransparentView()
+        delegate?.updateCards()
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, SettingsVCDelegate {
     
     @IBOutlet var backgroundView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -30,12 +30,7 @@ class MainViewController: UIViewController {
         setupCollectionView()
         setBackground()
         loadCardSymbols()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         checkGameDifficulty()
-        selectBackgroundColor()
-        updateColelctionViewLayout()
         newGame()
     }
     
@@ -72,12 +67,16 @@ class MainViewController: UIViewController {
     }
     
     private func newGame() {
+        guard let cellArray = collectionView.visibleCells as? [CardCollectionViewCell] else { return }
+        for cell in cellArray {
+            configureCellDefaultState(cell: cell)
+        } // return all cells to default state
+        checkGameDifficulty()
+        selectBackgroundColor()
+        updateColelctionViewLayout()
         loadCardSymbols()
         GameScore.shared.clearScore()
         updateScoreLabel()
-        for item in cardsTappedCellArray {
-            configureCellDefaultState(cell: item)
-        }
         collectionView.reloadData()
         cardsTappedCellArray = []
         cardsTappedSymbolArray = []
@@ -105,6 +104,12 @@ class MainViewController: UIViewController {
         scoreLabel.text = "Current Score: \(GameScore.shared.getCurrentScoreFor(difficulty: currentGameDifficulty))"
     }
     
+    func updateCards() {
+        if currentGameDifficulty != CardGameSettings.shared.checkDifficulty() {
+            newGame()
+        }
+    }
+    
     private func configureCellDefaultState(cell: CardCollectionViewCell) {
         cell.cellButton.setTitle("", for: .normal)
         cell.cellButton.isEnabled = true
@@ -119,12 +124,6 @@ class MainViewController: UIViewController {
         cardsTappedCellArray.append(cell)
         cardsTappedSymbolArray.append(self.symbolsForGame[indexPath.item])
         matchTappedCards()
-    }
-    
-    func checkForChanges() {
-        if currentGameDifficulty != CardGameSettings.shared.checkDifficulty() {
-            newGame()
-        }
     }
     
     // MARK: - Card Check
@@ -169,6 +168,14 @@ class MainViewController: UIViewController {
         GameScore.shared.updateScoreFor(difficulty: currentGameDifficulty, by: result)
         updateScoreLabel()
         cardsTappedCellArray = [] // clear
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? SettingsViewController, let settingsVC = destination as SettingsViewController? {
+            settingsVC.delegate = self
+        }
     }
     
     // MARK: - Actions
