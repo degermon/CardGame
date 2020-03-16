@@ -24,6 +24,7 @@ class MainViewController: UIViewController, SettingsVCDelegate {
     private var cardsTappedCellArray: [CardCollectionViewCell] = []
     private var cardsTappedSymbolArray: [String] = []
     private var cardFontSize: CGFloat = 10.0
+    private var cardPairsMatched = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,10 +68,7 @@ class MainViewController: UIViewController, SettingsVCDelegate {
     }
     
     private func newGame() {
-        guard let cellArray = collectionView.visibleCells as? [CardCollectionViewCell] else { return }
-        for cell in cellArray {
-            configureCellDefaultState(cell: cell)
-        } // return all cells to default state
+        resetCells()
         checkGameDifficulty()
         selectBackgroundColor()
         updateColelctionViewLayout()
@@ -80,7 +78,50 @@ class MainViewController: UIViewController, SettingsVCDelegate {
         collectionView.reloadData()
         cardsTappedCellArray = []
         cardsTappedSymbolArray = []
+        cardPairsMatched = 0
     }
+    
+    private func updateScoreLabel() {
+        scoreLabel.text = "Current Score: \(GameScore.shared.getCurrentScoreFor(difficulty: currentGameDifficulty))"
+    }
+    
+    func updateCards() {
+        if currentGameDifficulty != CardGameSettings.shared.checkDifficulty() {
+            newGame()
+        }
+    }
+    
+    func checkForGameEnd() { //"Easy", "Normal", "Hard"
+        switch currentGameDifficulty {
+        case "Easy":
+            if cardPairsMatched == 8 {
+                showEndgameAlert()
+            }
+        case "Normal":
+            if cardPairsMatched == 5 {
+                showEndgameAlert()
+            }
+        case "Hard":
+            if cardPairsMatched == 6 {
+                showEndgameAlert()
+            }
+        default:
+            break
+        }
+    }
+    
+    func showEndgameAlert() { // will be changed later
+        let alertController = UIAlertController(title: "Game over", message: "Your score \(GameScore.shared.getCurrentScoreFor(difficulty: currentGameDifficulty))", preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "New Game", style: .default, handler: { (_) in
+            self.newGame()
+        }))
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    // MARK: - Backround setup
     
     private func setBackground() {
         gradientLayer.frame = view.bounds
@@ -100,14 +141,13 @@ class MainViewController: UIViewController, SettingsVCDelegate {
         }
     }
     
-    private func updateScoreLabel() {
-        scoreLabel.text = "Current Score: \(GameScore.shared.getCurrentScoreFor(difficulty: currentGameDifficulty))"
-    }
+    // MARK: - CollectionVeiw Cell related
     
-    func updateCards() {
-        if currentGameDifficulty != CardGameSettings.shared.checkDifficulty() {
-            newGame()
-        }
+    private func resetCells() {
+        guard let cellArray = collectionView.visibleCells as? [CardCollectionViewCell] else { return }
+        for cell in cellArray {
+            configureCellDefaultState(cell: cell)
+        } // return all cells to default state
     }
     
     private func configureCellDefaultState(cell: CardCollectionViewCell) {
@@ -158,6 +198,8 @@ class MainViewController: UIViewController, SettingsVCDelegate {
             for item in cardsTappedCellArray {
                 item.alpha = 0.4
             }
+            cardPairsMatched += 1
+            checkForGameEnd()
         } else {
             for item in cardsTappedCellArray {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
