@@ -16,24 +16,31 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet var backgroundView: UIView!
     @IBOutlet weak var difficultyButton: UIButton!
+    @IBOutlet weak var collectionView: UICollectionView!
     
+    // MARK: - Variables
+    
+    let gameDifficulties = ["Easy", "Normal", "Hard"]
+    let cellIdentifier = "CardCollectionViewCell"
+    weak var delegate: SettingsVCDelegate?
     private let gradientLayer = CAGradientLayer()
+    private let collectionViewConfig = CollectionViewLayoutConfig()
     private let transparentView = UIView()
     private let tableView = UITableView()
     private var selectedButton = UIButton() // used later in animations
-    private let gameDifficulties = ["Easy", "Normal", "Hard"]
-    weak var delegate: SettingsVCDelegate?
 
+    // MARK: - Config
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackground()
         setupTableView()
+        setupCollectionView()
         checkGameDifficulty()
+        updateColelctionViewLayout()
     }
-    
-    // MARK: - Config
-    
-    func setBackground() {
+        
+    private func setBackground() {
         gradientLayer.frame = view.bounds
         gradientLayer.colors = [#colorLiteral(red: 0.7956927419, green: 0.4451861978, blue: 0.8532453179, alpha: 1).cgColor, #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1).cgColor]
         gradientLayer.shouldRasterize = true
@@ -42,15 +49,39 @@ class SettingsViewController: UIViewController {
         backgroundView.layer.insertSublayer(gradientLayer, at: 0)
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(PickerTableViewCell.self, forCellReuseIdentifier: "pickerTableViewCell")
     }
     
-    private func checkGameDifficulty() {
+    private func setupCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        let nib = UINib(nibName: "CardCollectionViewCell", bundle: nil)
+        collectionView.register(nib, forCellWithReuseIdentifier: cellIdentifier)
+    }
+    
+    private func updateColelctionViewLayout() {
+        let collectionViewConfig = CollectionViewLayoutConfig()
+        let items = CardGameSettings.shared.getCardSkinNames().count
+        collectionViewConfig.configureLayout(for: collectionView, itemPerRow: CGFloat(items), lineSpacing: 5, interItemSpacing: 15)
+    }
+    
+    func checkGameDifficulty() {
         let currentGameDifficulty = CardGameSettings.shared.checkDifficulty()
         difficultyButton.setTitle(currentGameDifficulty, for: .normal)
+    }
+    
+    // MARK: - CollectionView cell related
+    
+    func configureCellDefaultState(cell: CardCollectionViewCell, skinName: String) {
+        cell.cellButton.setTitle("", for: .normal)
+        cell.cellButton.isEnabled = true
+        guard let image = UIImage(named: skinName) else {
+            return
+        }
+        cell.cellButton.setBackgroundImage(image, for: .normal)
     }
     
     // MARK: - DropDown Picker configuration
@@ -91,29 +122,5 @@ class SettingsViewController: UIViewController {
     @IBAction func difficultyButtonTapped(_ sender: Any) {
         selectedButton = difficultyButton
         addTransparentView()
-    }
-}
-
-// MARK: - TableView Extension
-
-extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return gameDifficulties.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "pickerTableViewCell", for: indexPath)
-        cell.textLabel?.text = gameDifficulties[indexPath.row]
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let chosenDifficulty = gameDifficulties[indexPath.row]
-        CardGameSettings.shared.setDifficulty(difficulty: chosenDifficulty)
-        checkGameDifficulty()
-        removeTransparentView()
-        delegate?.updateCards()
     }
 }

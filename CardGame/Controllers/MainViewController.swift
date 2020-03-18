@@ -14,28 +14,30 @@ class MainViewController: UIViewController, SettingsVCDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var scoreLabel: UILabel!
     
+    // MARK: - Variables
+    
+    let cellIdentifier = "CardCollectionViewCell"
+    var symbolsForGame: [String] = []
     private let gradientLayer = CAGradientLayer()
-    let config = CollectionViewLayoutConfig()
+    private let collectionViewConfig = CollectionViewLayoutConfig()
     private let checkMatchingCards = CheckMatchingCards()
     private var collectionViewFlowLayout: UICollectionViewFlowLayout!
     private var currentGameDifficulty: String = ""
-    private let cellIdentifier = "CardCollectionViewCell"
-    private var symbolsForGame: [String] = []
     private var cardsTappedCellArray: [CardCollectionViewCell] = []
     private var cardsTappedSymbolArray: [String] = []
     private var cardFontSize: CGFloat = 10.0
     private var cardPairsMatched = 0
 
+    // MARK: - Config
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
         setBackground()
         loadCardSymbols()
         checkGameDifficulty()
-        newGame()
+        settingsChanged() // set/load all on first launch
     }
-    
-    // MARK: - Config
     
     private func checkGameDifficulty() {
         currentGameDifficulty = CardGameSettings.shared.checkDifficulty()
@@ -49,16 +51,16 @@ class MainViewController: UIViewController, SettingsVCDelegate {
     }
     
     private func getCardFontSize() {
-        cardFontSize = config.getSize()
+        cardFontSize = collectionViewConfig.getSize()
     }
     
     private func updateColelctionViewLayout() {
         if currentGameDifficulty == "Easy" {
-            collectionViewFlowLayout = config.configureLayout(for: collectionView, itemPerRow: 4, lineSpacing: 15, interItemSpacing: 15)
+            collectionViewConfig.configureLayout(for: collectionView, itemPerRow: 4, lineSpacing: 15, interItemSpacing: 15)
         } else if currentGameDifficulty == "Normal" {
-            collectionViewFlowLayout = config.configureLayout(for: collectionView, itemPerRow: 4, lineSpacing: 15, interItemSpacing: 15)
+            collectionViewConfig.configureLayout(for: collectionView, itemPerRow: 4, lineSpacing: 15, interItemSpacing: 15)
         } else {
-            collectionViewFlowLayout = config.configureLayout(for: collectionView, itemPerRow: 5, lineSpacing: 15, interItemSpacing: 15)
+            collectionViewConfig.configureLayout(for: collectionView, itemPerRow: 5, lineSpacing: 15, interItemSpacing: 15)
         }
         getCardFontSize()
     }
@@ -69,26 +71,29 @@ class MainViewController: UIViewController, SettingsVCDelegate {
     
     private func newGame() {
         resetCells()
-        checkGameDifficulty()
-        selectBackgroundColor()
-        updateColelctionViewLayout()
-        loadCardSymbols()
+        cardPairsMatched = 0
         GameScore.shared.clearScore()
         updateScoreLabel()
         collectionView.reloadData()
         cardsTappedCellArray = []
         cardsTappedSymbolArray = []
-        cardPairsMatched = 0
+    }
+    
+    private func settingsChanged() {
+        checkGameDifficulty()
+        selectBackgroundColor()
+        updateColelctionViewLayout()
+        loadCardSymbols()
+        newGame()
+    }
+    
+    func updateCards() {
+        settingsChanged()
     }
     
     private func updateScoreLabel() {
         scoreLabel.text = "Current Score: \(GameScore.shared.getCurrentScoreFor(difficulty: currentGameDifficulty))"
-    }
-    
-    func updateCards() {
-        if currentGameDifficulty != CardGameSettings.shared.checkDifficulty() {
-            newGame()
-        }
+        checkForGameEnd()
     }
     
     func checkForGameEnd() { //"Easy", "Normal", "Hard"
@@ -110,7 +115,7 @@ class MainViewController: UIViewController, SettingsVCDelegate {
         }
     }
     
-    func showEndgameAlert() { // will be changed later
+    private func showEndgameAlert() { // will be changed later
         let alertController = UIAlertController(title: "Game over", message: "Your score \(GameScore.shared.getCurrentScoreFor(difficulty: currentGameDifficulty))", preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction(title: "New Game", style: .default, handler: { (_) in
@@ -143,20 +148,20 @@ class MainViewController: UIViewController, SettingsVCDelegate {
     
     // MARK: - CollectionVeiw Cell related
     
-    private func resetCells() {
+    func resetCells() {
         guard let cellArray = collectionView.visibleCells as? [CardCollectionViewCell] else { return }
         for cell in cellArray {
             configureCellDefaultState(cell: cell)
         } // return all cells to default state
     }
     
-    private func configureCellDefaultState(cell: CardCollectionViewCell) {
+    func configureCellDefaultState(cell: CardCollectionViewCell) {
         cell.cellButton.setTitle("", for: .normal)
         cell.cellButton.isEnabled = true
         cell.cellButton.setBackgroundImage(CardGameSettings.shared.getCardBackImage(), for: .normal)
     }
     
-    private func configureClickedCellState(cell: CardCollectionViewCell, for indexPath: IndexPath) {
+    func configureClickedCellState(cell: CardCollectionViewCell, for indexPath: IndexPath) {
         cell.cellButton?.titleLabel?.font =  .systemFont(ofSize: self.cardFontSize)
         cell.cellButton.setTitle(self.symbolsForGame[indexPath.item], for: .normal)
         cell.cellButton.setBackgroundImage(UIImage(), for: .normal)
@@ -199,7 +204,6 @@ class MainViewController: UIViewController, SettingsVCDelegate {
                 item.alpha = 0.4
             }
             cardPairsMatched += 1
-            checkForGameEnd()
         } else {
             for item in cardsTappedCellArray {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -228,27 +232,5 @@ class MainViewController: UIViewController, SettingsVCDelegate {
     
     @IBAction func newGameButtonTapped(_ sender: UIButton) {
         newGame()
-    }
-}
-
-// MARK: - CollectionView extension
-
-extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return symbolsForGame.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? CardCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        
-        configureCellDefaultState(cell: cell)
-        cell.buttonAction = { [unowned self] in
-            self.configureClickedCellState(cell: cell, for: indexPath)
-        }
-        
-        return cell
     }
 }

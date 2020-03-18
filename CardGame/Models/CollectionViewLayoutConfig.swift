@@ -12,7 +12,7 @@ class CollectionViewLayoutConfig { // simply took out part of code from MainView
     
     private var size: CGFloat?
     
-    func configureLayout(for view: UICollectionView, itemPerRow: CGFloat, lineSpacing: CGFloat, interItemSpacing: CGFloat) -> UICollectionViewFlowLayout {
+    func configureLayout(for view: UICollectionView, itemPerRow: CGFloat, lineSpacing: CGFloat, interItemSpacing: CGFloat) {
         
         let width = (view.frame.width - (itemPerRow - 1) * interItemSpacing) / itemPerRow
         let height = 1.5 * width
@@ -22,13 +22,10 @@ class CollectionViewLayoutConfig { // simply took out part of code from MainView
         
         viewFlowLayout.itemSize = CGSize(width: width, height: height)
         viewFlowLayout.sectionInset = .zero
-        viewFlowLayout.scrollDirection = .vertical
         viewFlowLayout.minimumLineSpacing = lineSpacing
         viewFlowLayout.minimumInteritemSpacing = interItemSpacing
         
         view.setCollectionViewLayout(viewFlowLayout, animated: true)
-        
-        return viewFlowLayout
     }
     
     func getSize() -> CGFloat {

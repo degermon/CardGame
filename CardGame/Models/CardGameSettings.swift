@@ -13,9 +13,16 @@ class CardGameSettings {
     
     private var gameDifficulty: String = "Easy" // Easy by default
     private var cardBackImage = UIImage(named: "tarrotCardBack") // first default value
+    private let cardSkinNames = ["tarrotCardBack", "dragonCardBack", "violetCardBack", "linedCardBack"]
     
     func setDifficulty(difficulty: String) {
         gameDifficulty = difficulty
+    }
+    
+    func setCardSkinFor(index: Int) {
+        if index < cardSkinNames.count {
+            cardBackImage = UIImage(named: cardSkinNames[index])
+        }
     }
     
     func checkDifficulty() -> String {
@@ -24,5 +31,9 @@ class CardGameSettings {
     
     func getCardBackImage() -> UIImage {
         return cardBackImage ?? UIImage()
+    }
+    
+    func getCardSkinNames() -> [String] {
+        return cardSkinNames
     }
 }

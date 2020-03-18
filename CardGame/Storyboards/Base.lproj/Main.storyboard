@@ -104,25 +104,52 @@
                                 <color key="textColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card skin:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bj-Cs-wFn">
+                                <rect key="frame" x="15" y="148" width="384" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kg6-ov-ClJ">
+                                <rect key="frame" x="20" y="187" width="374" height="130"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="6Ds-jr-idQ"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="r69-cT-xIs">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="kg6-ov-ClJ" firstAttribute="leading" secondItem="but-36-MOO" secondAttribute="leading" constant="20" id="1Ag-zY-07l"/>
+                            <constraint firstItem="kg6-ov-ClJ" firstAttribute="top" secondItem="8bj-Cs-wFn" secondAttribute="bottom" constant="15" id="BgV-BS-sJL"/>
                             <constraint firstItem="p0W-Ip-NVy" firstAttribute="leading" secondItem="but-36-MOO" secondAttribute="leading" constant="15" id="DcT-Aq-HzX"/>
                             <constraint firstItem="p0W-Ip-NVy" firstAttribute="top" secondItem="MLt-yl-Cx9" secondAttribute="bottom" constant="15" id="Jm8-la-x1G"/>
                             <constraint firstItem="10M-TZ-Mkj" firstAttribute="leading" secondItem="p0W-Ip-NVy" secondAttribute="trailing" constant="20" id="Kkj-dj-Ai3"/>
+                            <constraint firstItem="but-36-MOO" firstAttribute="trailing" secondItem="kg6-ov-ClJ" secondAttribute="trailing" constant="20" id="Lfc-Im-Fvs"/>
                             <constraint firstItem="10M-TZ-Mkj" firstAttribute="top" secondItem="MLt-yl-Cx9" secondAttribute="bottom" constant="15" id="TrN-Vs-vf1"/>
                             <constraint firstItem="p0W-Ip-NVy" firstAttribute="height" secondItem="10M-TZ-Mkj" secondAttribute="height" id="V5E-eW-ecG"/>
                             <constraint firstItem="MLt-yl-Cx9" firstAttribute="leading" secondItem="but-36-MOO" secondAttribute="leading" constant="15" id="XJg-1m-kUF"/>
                             <constraint firstItem="MLt-yl-Cx9" firstAttribute="top" secondItem="but-36-MOO" secondAttribute="top" constant="15" id="eTS-N7-Kcg"/>
                             <constraint firstItem="but-36-MOO" firstAttribute="trailing" secondItem="10M-TZ-Mkj" secondAttribute="trailing" constant="15" id="fNE-af-MuJ"/>
                             <constraint firstItem="p0W-Ip-NVy" firstAttribute="width" secondItem="10M-TZ-Mkj" secondAttribute="width" multiplier="0.6" id="jcI-Xo-zQR"/>
+                            <constraint firstItem="but-36-MOO" firstAttribute="trailing" secondItem="8bj-Cs-wFn" secondAttribute="trailing" constant="15" id="tJ4-fo-GM8"/>
                             <constraint firstItem="but-36-MOO" firstAttribute="trailing" secondItem="MLt-yl-Cx9" secondAttribute="trailing" constant="15" id="uYu-g7-Fu3"/>
+                            <constraint firstItem="8bj-Cs-wFn" firstAttribute="top" secondItem="10M-TZ-Mkj" secondAttribute="bottom" constant="20" id="xUu-OA-xSm"/>
+                            <constraint firstItem="8bj-Cs-wFn" firstAttribute="leading" secondItem="but-36-MOO" secondAttribute="leading" constant="15" id="ynt-7O-HQa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="but-36-MOO"/>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="0Rh-Mr-KRN"/>
                     <connections>
                         <outlet property="backgroundView" destination="zIE-3I-xZJ" id="H3A-JF-WRO"/>
+                        <outlet property="collectionView" destination="kg6-ov-ClJ" id="bBM-fr-zl6"/>
                         <outlet property="difficultyButton" destination="10M-TZ-Mkj" id="TcT-ti-pHN"/>
                     </connections>
                 </viewController>
