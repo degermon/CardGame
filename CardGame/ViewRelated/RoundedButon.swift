@@ -14,8 +14,12 @@ class RoundedButon: UIButton { // simple button class with rounded corners
         super.awakeFromNib()
         
         self.layer.cornerRadius = 15.0
-        self.layer.borderWidth = 1.0
-        self.layer.borderColor = UIColor.red.cgColor
         self.layer.masksToBounds = true
+        setBorder()
+    }
+    
+    func setBorder(borderWidth: CGFloat = 1.0, borderColor: CGColor = UIColor.red.cgColor) {
+        self.layer.borderWidth = borderWidth
+        self.layer.borderColor = borderColor
     }
 }

@@ -12,6 +12,7 @@ class CardGameSettings {
     static let shared = CardGameSettings()
     
     private var gameDifficulty: String = "Easy" // Easy by default
+    private let allGameDifficulties = ["Easy", "Normal", "Hard"]
     private var cardBackImage = UIImage(named: "tarrotCardBack") // first default value
     private let cardSkinNames = ["tarrotCardBack", "dragonCardBack", "violetCardBack", "linedCardBack"]
     
@@ -27,6 +28,10 @@ class CardGameSettings {
     
     func checkDifficulty() -> String {
         return gameDifficulty
+    }
+    
+    func getAllGameDifficulties() -> [String] {
+        return allGameDifficulties
     }
     
     func getCardBackImage() -> UIImage {

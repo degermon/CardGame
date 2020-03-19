@@ -20,7 +20,7 @@ class SettingsViewController: UIViewController {
     
     // MARK: - Variables
     
-    let gameDifficulties = ["Easy", "Normal", "Hard"]
+    let gameDifficulties = CardGameSettings.shared.getAllGameDifficulties()
     let cellIdentifier = "CardCollectionViewCell"
     weak var delegate: SettingsVCDelegate?
     private let gradientLayer = CAGradientLayer()
@@ -28,6 +28,7 @@ class SettingsViewController: UIViewController {
     private let transparentView = UIView()
     private let tableView = UITableView()
     private var selectedButton = UIButton() // used later in animations
+    private var selectedSkinCell = CardCollectionViewCell()
 
     // MARK: - Config
     
@@ -82,6 +83,23 @@ class SettingsViewController: UIViewController {
             return
         }
         cell.cellButton.setBackgroundImage(image, for: .normal)
+    }
+    
+    func skinSelected(cell: CardCollectionViewCell) {
+        skinDeselected(cell: selectedSkinCell)
+        guard let image = UIImage(named: "checkmark") else {
+            return
+        }
+        cell.cellButton.setImage(image, for: .normal)
+        cell.alpha = 0.7
+        selectedSkinCell = cell
+    }
+    
+    func skinDeselected(cell: CardCollectionViewCell) {
+        if cell.cellButton != nil {
+            cell.cellButton.setImage(UIImage(), for: .normal)
+        }
+        cell.alpha = 1
     }
     
     // MARK: - DropDown Picker configuration
