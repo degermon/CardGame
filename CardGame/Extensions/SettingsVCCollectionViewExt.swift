@@ -21,7 +21,9 @@ extension SettingsViewController: UICollectionViewDelegate, UICollectionViewData
         }
         
         cell.buttonAction = { [unowned self] in
-            CardGameSettings.shared.setCardSkinFor(index: indexPath.item)
+            let skin = CardGameSettings.shared.getCardSkinNames()[indexPath.item]
+            UserDefaultsDataManager.shared.saveSelectedSkin(skin: skin)
+            CardGameSettings.shared.setCardSkin(skin: skin)
             self.delegate?.updateCards()
             self.skinSelected(cell: cell) // select new
         }

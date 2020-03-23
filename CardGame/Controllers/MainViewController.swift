@@ -32,6 +32,7 @@ class MainViewController: UIViewController, SettingsVCDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        CardGameSettings.shared.checkDefaults()
         setupCollectionView()
         setBackground()
         loadCardSymbols()

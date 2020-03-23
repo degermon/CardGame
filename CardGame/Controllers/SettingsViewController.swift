@@ -83,6 +83,9 @@ class SettingsViewController: UIViewController {
             return
         }
         cell.cellButton.setBackgroundImage(image, for: .normal)
+        if image == CardGameSettings.shared.getCardBackImage() {
+            skinSelected(cell: cell)
+        }
     }
     
     func skinSelected(cell: CardCollectionViewCell) {

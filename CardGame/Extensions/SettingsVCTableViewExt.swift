@@ -23,6 +23,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let chosenDifficulty = gameDifficulties[indexPath.row]
+        UserDefaultsDataManager.shared.saveDifficulty(difficulty: chosenDifficulty)
         CardGameSettings.shared.setDifficulty(difficulty: chosenDifficulty)
         checkGameDifficulty()
         removeTransparentView()
