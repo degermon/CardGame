@@ -40,6 +40,10 @@ class MainViewController: UIViewController, SettingsVCDelegate {
         settingsChanged() // set/load all on first launch
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        displayDifficultyAlert()
+    }
+    
     private func checkGameDifficulty() {
         currentGameDifficulty = CardGameSettings.shared.checkDifficulty()
     }
@@ -92,6 +96,10 @@ class MainViewController: UIViewController, SettingsVCDelegate {
         settingsChanged()
     }
     
+    func startNewGame() {
+        newGame()
+    }
+    
     private func updateScoreLabel() {
         scoreLabel.text = "Current Score: \(GameScore.shared.getCurrentScoreFor(difficulty: currentGameDifficulty))"
         checkForGameEnd()
@@ -115,18 +123,6 @@ class MainViewController: UIViewController, SettingsVCDelegate {
             break
         }
     }
-    
-    private func showEndgameAlert() { // will be changed later
-        let alertController = UIAlertController(title: "Game over", message: "Your score \(GameScore.shared.getCurrentScoreFor(difficulty: currentGameDifficulty))", preferredStyle: .alert)
-        
-        alertController.addAction(UIAlertAction(title: "New Game", style: .default, handler: { (_) in
-            self.newGame()
-        }))
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
-        
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
     // MARK: - Backround setup
     
     private func setBackground() {

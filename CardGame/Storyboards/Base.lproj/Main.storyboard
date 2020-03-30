@@ -124,6 +124,13 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JB3-Hy-m5s">
+                                <rect key="frame" x="20" y="337" width="374" height="175.66666666666663"/>
+                                <string key="text">Game Rules: You have to match same cards. Fore each successful match you receive 3 points, for each unsuccessful -1. Easy difficulty - match 2 same cards Normal difficulty - match 3 same cards Hard difficulty - match 4 same cards</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <color key="textColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -133,9 +140,12 @@
                             <constraint firstItem="p0W-Ip-NVy" firstAttribute="top" secondItem="MLt-yl-Cx9" secondAttribute="bottom" constant="15" id="Jm8-la-x1G"/>
                             <constraint firstItem="10M-TZ-Mkj" firstAttribute="leading" secondItem="p0W-Ip-NVy" secondAttribute="trailing" constant="20" id="Kkj-dj-Ai3"/>
                             <constraint firstItem="but-36-MOO" firstAttribute="trailing" secondItem="kg6-ov-ClJ" secondAttribute="trailing" constant="20" id="Lfc-Im-Fvs"/>
+                            <constraint firstItem="JB3-Hy-m5s" firstAttribute="top" secondItem="kg6-ov-ClJ" secondAttribute="bottom" constant="20" id="MfT-Zt-4vt"/>
                             <constraint firstItem="10M-TZ-Mkj" firstAttribute="top" secondItem="MLt-yl-Cx9" secondAttribute="bottom" constant="15" id="TrN-Vs-vf1"/>
                             <constraint firstItem="p0W-Ip-NVy" firstAttribute="height" secondItem="10M-TZ-Mkj" secondAttribute="height" id="V5E-eW-ecG"/>
                             <constraint firstItem="MLt-yl-Cx9" firstAttribute="leading" secondItem="but-36-MOO" secondAttribute="leading" constant="15" id="XJg-1m-kUF"/>
+                            <constraint firstItem="but-36-MOO" firstAttribute="trailing" secondItem="JB3-Hy-m5s" secondAttribute="trailing" constant="20" id="dwM-Db-Oyg"/>
+                            <constraint firstItem="JB3-Hy-m5s" firstAttribute="leading" secondItem="but-36-MOO" secondAttribute="leading" constant="20" id="eBQ-7J-ZtS"/>
                             <constraint firstItem="MLt-yl-Cx9" firstAttribute="top" secondItem="but-36-MOO" secondAttribute="top" constant="15" id="eTS-N7-Kcg"/>
                             <constraint firstItem="but-36-MOO" firstAttribute="trailing" secondItem="10M-TZ-Mkj" secondAttribute="trailing" constant="15" id="fNE-af-MuJ"/>
                             <constraint firstItem="p0W-Ip-NVy" firstAttribute="width" secondItem="10M-TZ-Mkj" secondAttribute="width" multiplier="0.6" id="jcI-Xo-zQR"/>
