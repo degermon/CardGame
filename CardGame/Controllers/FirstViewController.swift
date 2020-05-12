@@ -17,6 +17,7 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         CardGameSettings.shared.checkDefaults()
+        GameScore.shared.checkDefaults()
         setMainImage()
         difficultySelected()
     }

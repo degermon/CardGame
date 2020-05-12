@@ -17,6 +17,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet var backgroundView: UIView!
     @IBOutlet weak var difficultyButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var highscoreLabel: UILabel!
     
     // MARK: - Variables
     
@@ -39,6 +40,7 @@ class SettingsViewController: UIViewController {
         setupCollectionView()
         checkGameDifficulty()
         updateColelctionViewLayout()
+        updateHigscoreLabel()
     }
         
     private func setBackground() {
@@ -67,6 +69,10 @@ class SettingsViewController: UIViewController {
         let collectionViewConfig = CollectionViewLayoutConfig()
         let items = CardGameSettings.shared.getCardSkinNames().count
         collectionViewConfig.configureLayout(for: collectionView, itemPerRow: CGFloat(items), lineSpacing: 5, interItemSpacing: 15)
+    }
+    
+    private func updateHigscoreLabel() {
+        highscoreLabel.text = "\(gameDifficulties[0]): \(GameScore.shared.getCurrentHighscoreFor(difficulty: gameDifficulties[0]))\n\(gameDifficulties[1]): \(GameScore.shared.getCurrentHighscoreFor(difficulty: gameDifficulties[1]))\n\(gameDifficulties[2]): \(GameScore.shared.getCurrentHighscoreFor(difficulty: gameDifficulties[2])) "
     }
     
     func checkGameDifficulty() {
@@ -143,5 +149,10 @@ class SettingsViewController: UIViewController {
     @IBAction func difficultyButtonTapped(_ sender: Any) {
         selectedButton = difficultyButton
         addTransparentView()
+    }
+    
+    @IBAction func clearHighscoreButtonTapped(_ sender: Any) {
+        GameScore.shared.clearHighscore()
+        updateHigscoreLabel()
     }
 }

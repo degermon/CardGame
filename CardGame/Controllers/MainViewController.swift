@@ -13,6 +13,7 @@ class MainViewController: UIViewController, SettingsVCDelegate {
     @IBOutlet var backgroundView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var highscoreLabel: UILabel!
     
     // MARK: - Variables
     
@@ -37,6 +38,10 @@ class MainViewController: UIViewController, SettingsVCDelegate {
         loadCardSymbols()
         checkGameDifficulty()
         settingsChanged() // set/load all on first launch
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        updateHighcoreLabel()
     }
         
     private func checkGameDifficulty() {
@@ -97,7 +102,12 @@ class MainViewController: UIViewController, SettingsVCDelegate {
     
     private func updateScoreLabel() {
         scoreLabel.text = "Current Score: \(GameScore.shared.getCurrentScoreFor(difficulty: currentGameDifficulty))"
+        updateHighcoreLabel()
         checkForGameEnd()
+    }
+    
+    private func updateHighcoreLabel() {
+        highscoreLabel.text = "Highscore: \(GameScore.shared.getCurrentHighscoreFor(difficulty: currentGameDifficulty))"
     }
     
     func checkForGameEnd() { //"Easy", "Normal", "Hard"

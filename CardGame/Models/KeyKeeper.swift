@@ -10,6 +10,7 @@ import Foundation
 
 class KeyKeeper {
     static let shared = KeyKeeper()
-    let difficultyKey = "difficultyKey"
-    let selectedSkinKey = "selectedSkinKey"
+    let USER_DEFAULTS_KEY_DIFFICULTY = "difficultyKey"
+    let USER_DEFAULTS_KEY_SELECTED_SKIN = "selectedSkinKey"
+    let USER_DEFAULTS_KEY_HIGHSCORE = "highscoreKey"
 }
