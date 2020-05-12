@@ -22,6 +22,8 @@
 		652C4F4A242931F000D2E160 /* KeyKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652C4F49242931F000D2E160 /* KeyKeeper.swift */; };
 		652C4F4C2429331D00D2E160 /* UserDefaultsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652C4F4B2429331D00D2E160 /* UserDefaultsDataManager.swift */; };
 		652C4F50243258A800D2E160 /* MainVCAlertExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652C4F4F243258A800D2E160 /* MainVCAlertExt.swift */; };
+		652C4F52246AB1C400D2E160 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652C4F51246AB1C400D2E160 /* FirstViewController.swift */; };
+		652C4F54246AB5D100D2E160 /* FirstVCAlertExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652C4F53246AB5D100D2E160 /* FirstVCAlertExt.swift */; };
 		652ECE1D2410199B004FFB23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652ECE1C2410199B004FFB23 /* AppDelegate.swift */; };
 		652ECE1F2410199B004FFB23 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652ECE1E2410199B004FFB23 /* SceneDelegate.swift */; };
 		652ECE212410199B004FFB23 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652ECE202410199B004FFB23 /* MainViewController.swift */; };
@@ -47,6 +49,8 @@
 		652C4F49242931F000D2E160 /* KeyKeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyKeeper.swift; sourceTree = "<group>"; };
 		652C4F4B2429331D00D2E160 /* UserDefaultsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsDataManager.swift; sourceTree = "<group>"; };
 		652C4F4F243258A800D2E160 /* MainVCAlertExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCAlertExt.swift; sourceTree = "<group>"; };
+		652C4F51246AB1C400D2E160 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		652C4F53246AB5D100D2E160 /* FirstVCAlertExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstVCAlertExt.swift; sourceTree = "<group>"; };
 		652ECE192410199B004FFB23 /* CardGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		652ECE1C2410199B004FFB23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		652ECE1E2410199B004FFB23 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +76,7 @@
 		652C4F4224229C0700D2E160 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				652C4F53246AB5D100D2E160 /* FirstVCAlertExt.swift */,
 				652C4F4F243258A800D2E160 /* MainVCAlertExt.swift */,
 				652C4F4724229ED500D2E160 /* MainVCCollectionViewExt.swift */,
 				652C4F4524229D8F00D2E160 /* SettingsVCCollectionViewExt.swift */,
@@ -114,6 +119,7 @@
 		652ECE3024101ED4004FFB23 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				652C4F51246AB1C400D2E160 /* FirstViewController.swift */,
 				652ECE202410199B004FFB23 /* MainViewController.swift */,
 				652ECE3124101F26004FFB23 /* SettingsViewController.swift */,
 			);
@@ -246,12 +252,14 @@
 				6525E3E624116E0F0057A850 /* CardCollectionCell.swift in Sources */,
 				652C4F4424229C2100D2E160 /* SettingsVCTableViewExt.swift in Sources */,
 				652ECE3224101F26004FFB23 /* SettingsViewController.swift in Sources */,
+				652C4F52246AB1C400D2E160 /* FirstViewController.swift in Sources */,
 				652C4F4824229ED500D2E160 /* MainVCCollectionViewExt.swift in Sources */,
 				6525E3E92411706F0057A850 /* CardSymbols.swift in Sources */,
 				652C4F352412D1AE00D2E160 /* CollectionViewLayoutConfig.swift in Sources */,
 				652C4F37241AA5D200D2E160 /* CheckMatchingCards.swift in Sources */,
 				652C4F4624229D8F00D2E160 /* SettingsVCCollectionViewExt.swift in Sources */,
 				652C4F312412C6AA00D2E160 /* CardGameSettings.swift in Sources */,
+				652C4F54246AB5D100D2E160 /* FirstVCAlertExt.swift in Sources */,
 				652C4F4A242931F000D2E160 /* KeyKeeper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

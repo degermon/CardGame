@@ -32,18 +32,13 @@ class MainViewController: UIViewController, SettingsVCDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        CardGameSettings.shared.checkDefaults()
         setupCollectionView()
         setBackground()
         loadCardSymbols()
         checkGameDifficulty()
         settingsChanged() // set/load all on first launch
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        displayDifficultyAlert()
-    }
-    
+        
     private func checkGameDifficulty() {
         currentGameDifficulty = CardGameSettings.shared.checkDifficulty()
     }
