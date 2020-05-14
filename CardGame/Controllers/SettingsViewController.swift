@@ -24,7 +24,6 @@ class SettingsViewController: UIViewController {
     let gameDifficulties = CardGameSettings.shared.getAllGameDifficulties()
     let cellIdentifier = "CardCollectionViewCell"
     weak var delegate: SettingsVCDelegate?
-    private let gradientLayer = CAGradientLayer()
     private let collectionViewConfig = CollectionViewLayoutConfig()
     private let transparentView = UIView()
     private let tableView = UITableView()
@@ -35,21 +34,20 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setBackground()
         setupTableView()
         setupCollectionView()
         checkGameDifficulty()
         updateColelctionViewLayout()
         updateHigscoreLabel()
     }
-        
-    private func setBackground() {
-        gradientLayer.frame = view.bounds
-        gradientLayer.colors = [#colorLiteral(red: 0.7956927419, green: 0.4451861978, blue: 0.8532453179, alpha: 1).cgColor, #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1).cgColor]
-        gradientLayer.shouldRasterize = true
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0) // Top left corner.
-        gradientLayer.endPoint = CGPoint(x: 1, y: 1) // Bottom right corner.
-        backgroundView.layer.insertSublayer(gradientLayer, at: 0)
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setupBackground()
+    }
+    
+    func setupBackground() {
+        let backgroundGradient = BackgroundGradient()
+        backgroundGradient.setBackground(for: backgroundView, color1: #colorLiteral(red: 0.7956927419, green: 0.4451861978, blue: 0.8532453179, alpha: 1).cgColor, color2: #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1).cgColor, animate: true)
     }
     
     private func setupTableView() {

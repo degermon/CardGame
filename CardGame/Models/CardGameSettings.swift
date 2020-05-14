@@ -15,6 +15,7 @@ class CardGameSettings {
     private let allGameDifficulties = ["Easy", "Normal", "Hard"]
     private var cardBackImage = UIImage()
     private let cardSkinNames = ["tarrotCardBack", "dragonCardBack", "violetCardBack", "linedCardBack"]
+    private let colors = ["Easy": (#colorLiteral(red: 0, green: 0.5725490196, blue: 0.2705882353, alpha: 1).cgColor, #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1).cgColor), "Normal": (#colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1).cgColor, #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1).cgColor), "Hard": (#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1).cgColor, #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).cgColor)]
     
     func setDifficulty(difficulty: String) {
         gameDifficulty = difficulty
@@ -41,6 +42,13 @@ class CardGameSettings {
     
     func getCardSkinNames() -> [String] {
         return cardSkinNames
+    }
+    
+    func getColorFor(difficulty: String) -> (CGColor, CGColor) {
+        guard let colorsToReturn = colors[difficulty] else {
+            return (#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).cgColor, #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).cgColor)
+        }
+        return colorsToReturn
     }
     
     func checkDefaults () { // read data from defaults

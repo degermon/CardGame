@@ -14,6 +14,8 @@ class FirstViewController: UIViewController {
     @IBOutlet weak var difficultyButton: UIButton!
     private let mainImageName = "cardsLogoWithBackground"
 
+    // MARK: - Config
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         CardGameSettings.shared.checkDefaults()
@@ -25,8 +27,6 @@ class FirstViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         displayDifficultyAlert()
     }
-    
-    // MARK: - Config
     
     private func setMainImage() {
         guard let image = UIImage(named: mainImageName) else {

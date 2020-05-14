@@ -31,6 +31,7 @@
 		652ECE26241019A4004FFB23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 652ECE25241019A4004FFB23 /* Assets.xcassets */; };
 		652ECE29241019A4004FFB23 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 652ECE27241019A4004FFB23 /* LaunchScreen.storyboard */; };
 		652ECE3224101F26004FFB23 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652ECE3124101F26004FFB23 /* SettingsViewController.swift */; };
+		6553337B246DB51E0081B1CD /* BackgroundGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6553337A246DB51E0081B1CD /* BackgroundGradient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		652ECE28241019A4004FFB23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		652ECE2A241019A4004FFB23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		652ECE3124101F26004FFB23 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		6553337A246DB51E0081B1CD /* BackgroundGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundGradient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 		652ECE3324102099004FFB23 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6553337A246DB51E0081B1CD /* BackgroundGradient.swift */,
 				652C4F302412C6AA00D2E160 /* CardGameSettings.swift */,
 				6525E3E82411706F0057A850 /* CardSymbols.swift */,
 				652C4F36241AA5D200D2E160 /* CheckMatchingCards.swift */,
@@ -261,6 +264,7 @@
 				652C4F312412C6AA00D2E160 /* CardGameSettings.swift in Sources */,
 				652C4F54246AB5D100D2E160 /* FirstVCAlertExt.swift in Sources */,
 				652C4F4A242931F000D2E160 /* KeyKeeper.swift in Sources */,
+				6553337B246DB51E0081B1CD /* BackgroundGradient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
