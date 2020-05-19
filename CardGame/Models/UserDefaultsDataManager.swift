@@ -9,6 +9,7 @@
 import Foundation
 
 class UserDefaultsDataManager {
+    
     static let shared = UserDefaultsDataManager()
     private let defaults = UserDefaults.standard
     

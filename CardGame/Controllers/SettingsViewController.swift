@@ -16,18 +16,20 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet var backgroundView: UIView!
     @IBOutlet weak var difficultyButton: UIButton!
+    @IBOutlet weak var timerButton: RoundedButon!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var highscoreLabel: UILabel!
     
     // MARK: - Variables
     
-    let gameDifficulties = CardGameSettings.shared.getAllGameDifficulties()
     let cellIdentifier = "CardCollectionViewCell"
+    var itemsToPopulatePickerTableView: [String] = []
     weak var delegate: SettingsVCDelegate?
+    var selectedButton = UIButton() // used later in animations/picker table view
     private let collectionViewConfig = CollectionViewLayoutConfig()
+    private let gameDifficulties = CardGameSettings.shared.getAllGameDifficulties()
     private let transparentView = UIView()
     private let tableView = UITableView()
-    private var selectedButton = UIButton() // used later in animations
     private var selectedSkinCell = CardCollectionViewCell()
 
     // MARK: - Config
@@ -37,7 +39,8 @@ class SettingsViewController: UIViewController {
         setupTableView()
         setupCollectionView()
         checkGameDifficulty()
-        updateColelctionViewLayout()
+        checkGameTimerState()
+        updateCollectionViewLayout()
         updateHigscoreLabel()
     }
     
@@ -63,7 +66,7 @@ class SettingsViewController: UIViewController {
         collectionView.register(nib, forCellWithReuseIdentifier: cellIdentifier)
     }
     
-    private func updateColelctionViewLayout() {
+    private func updateCollectionViewLayout() {
         let collectionViewConfig = CollectionViewLayoutConfig()
         let items = CardGameSettings.shared.getCardSkinNames().count
         collectionViewConfig.configureLayout(for: collectionView, itemPerRow: CGFloat(items), lineSpacing: 5, interItemSpacing: 15)
@@ -76,6 +79,16 @@ class SettingsViewController: UIViewController {
     func checkGameDifficulty() {
         let currentGameDifficulty = CardGameSettings.shared.checkDifficulty()
         difficultyButton.setTitle(currentGameDifficulty, for: .normal)
+    }
+    
+    func checkGameTimerState() {
+        let gameTimerState = CardGameSettings.shared.getGameTimerState()
+        if gameTimerState {
+            timerButton.setTitle("Yes", for: .normal)
+
+        } else {
+            timerButton.setTitle("No", for: .normal)
+        }
     }
     
     // MARK: - CollectionView cell related
@@ -130,7 +143,7 @@ class SettingsViewController: UIViewController {
         transparentView.alpha = 0
         UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
             self.transparentView.alpha = 0.5
-            self.tableView.frame = CGRect(x: frame.origin.x, y: frame.origin.y + frame.height + 5, width: frame.width, height: CGFloat(self.gameDifficulties.count * 43))
+            self.tableView.frame = CGRect(x: frame.origin.x, y: frame.origin.y + frame.height + 5, width: frame.width, height: CGFloat(self.itemsToPopulatePickerTableView.count * 43))
         }, completion: nil) // added animation for better view
     }
     
@@ -146,6 +159,15 @@ class SettingsViewController: UIViewController {
         
     @IBAction func difficultyButtonTapped(_ sender: Any) {
         selectedButton = difficultyButton
+        itemsToPopulatePickerTableView = gameDifficulties
+        tableView.reloadData()
+        addTransparentView()
+    }
+    
+    @IBAction func timerButtonTapped(_ sender: Any) {
+        selectedButton = timerButton
+        itemsToPopulatePickerTableView = ["Yes", "No"]
+        tableView.reloadData()
         addTransparentView()
     }
     

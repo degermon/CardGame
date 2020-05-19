@@ -9,8 +9,9 @@
 import Foundation
 
 class CardSymbols {
+    
     static let shared = CardSymbols()
-    private var symbols = ["👺", "🤮", "🤑", "🎃", "🤒", "👀", "🧠", "🧑🏻‍🎤", "💧", "👿", "👽", "☠️", "🤡", "🧶", "🐸", "🌍"]
+    private let symbols = ["👺", "🤮", "🤑", "🎃", "🤒", "👀", "🧠", "🧑🏻‍🎤", "💧", "👿", "👽", "☠️", "🤡", "🧶", "🐸", "🌍"]
     
     func getSymbols(difficulty: String) -> [String] {
         switch difficulty {

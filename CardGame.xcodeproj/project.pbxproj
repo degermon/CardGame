@@ -32,6 +32,7 @@
 		652ECE29241019A4004FFB23 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 652ECE27241019A4004FFB23 /* LaunchScreen.storyboard */; };
 		652ECE3224101F26004FFB23 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652ECE3124101F26004FFB23 /* SettingsViewController.swift */; };
 		6553337B246DB51E0081B1CD /* BackgroundGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6553337A246DB51E0081B1CD /* BackgroundGradient.swift */; };
+		6553337F24742AF20081B1CD /* TimerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6553337E24742AF20081B1CD /* TimerClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		652ECE2A241019A4004FFB23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		652ECE3124101F26004FFB23 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6553337A246DB51E0081B1CD /* BackgroundGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundGradient.swift; sourceTree = "<group>"; };
+		6553337E24742AF20081B1CD /* TimerClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 				652C4F342412D1AE00D2E160 /* CollectionViewLayoutConfig.swift */,
 				652C4F3E241BBEDE00D2E160 /* GameScore.swift */,
 				652C4F49242931F000D2E160 /* KeyKeeper.swift */,
+				6553337E24742AF20081B1CD /* TimerClass.swift */,
 				652C4F4B2429331D00D2E160 /* UserDefaultsDataManager.swift */,
 			);
 			path = Models;
@@ -248,6 +251,7 @@
 				652C4F41241D662800D2E160 /* PickerTableViewCell.swift in Sources */,
 				652C4F3F241BBEDE00D2E160 /* GameScore.swift in Sources */,
 				652ECE1D2410199B004FFB23 /* AppDelegate.swift in Sources */,
+				6553337F24742AF20081B1CD /* TimerClass.swift in Sources */,
 				652C4F3D241ABB1900D2E160 /* RoundedButon.swift in Sources */,
 				652ECE1F2410199B004FFB23 /* SceneDelegate.swift in Sources */,
 				652C4F4C2429331D00D2E160 /* UserDefaultsDataManager.swift in Sources */,

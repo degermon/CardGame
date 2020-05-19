@@ -9,11 +9,12 @@
 import UIKit
 
 class CardGameSettings {
-    static let shared = CardGameSettings()
     
-    private var gameDifficulty: String = ""
-    private let allGameDifficulties = ["Easy", "Normal", "Hard"]
+    static let shared = CardGameSettings()
+    private var gameDifficulty = ""
+    private var gameTimerState = false
     private var cardBackImage = UIImage()
+    private let allGameDifficulties = ["Easy", "Normal", "Hard"]
     private let cardSkinNames = ["tarrotCardBack", "dragonCardBack", "violetCardBack", "linedCardBack"]
     private let colors = ["Easy": (#colorLiteral(red: 0, green: 0.5725490196, blue: 0.2705882353, alpha: 1).cgColor, #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1).cgColor), "Normal": (#colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1).cgColor, #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1).cgColor), "Hard": (#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1).cgColor, #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).cgColor)]
     
@@ -26,6 +27,10 @@ class CardGameSettings {
             return
         }
         cardBackImage = image
+    }
+    
+    func setGameTimer(state: Bool) {
+        gameTimerState = state
     }
     
     func checkDifficulty() -> String {
@@ -42,6 +47,10 @@ class CardGameSettings {
     
     func getCardSkinNames() -> [String] {
         return cardSkinNames
+    }
+    
+    func getGameTimerState() -> Bool {
+        return gameTimerState
     }
     
     func getColorFor(difficulty: String) -> (CGColor, CGColor) {

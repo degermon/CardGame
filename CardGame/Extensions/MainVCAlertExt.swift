@@ -9,6 +9,7 @@
 import UIKit
 
 extension MainViewController {
+    
     func showEndgameAlert() {
         let alertController = UIAlertController(title: "Game over", message: "Your score \(GameScore.shared.getCurrentScoreFor(difficulty:  CardGameSettings.shared.checkDifficulty()))", preferredStyle: .alert)
         

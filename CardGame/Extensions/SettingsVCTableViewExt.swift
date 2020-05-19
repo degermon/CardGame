@@ -9,24 +9,37 @@
 import UIKit
 
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return gameDifficulties.count
+        return itemsToPopulatePickerTableView.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "pickerTableViewCell", for: indexPath)
-        cell.textLabel?.text = gameDifficulties[indexPath.row]
+        cell.textLabel?.text = itemsToPopulatePickerTableView[indexPath.row]
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let chosenDifficulty = gameDifficulties[indexPath.row]
-        UserDefaultsDataManager.shared.saveDifficulty(difficulty: chosenDifficulty)
-        CardGameSettings.shared.setDifficulty(difficulty: chosenDifficulty)
-        checkGameDifficulty()
-        removeTransparentView()
+        switch selectedButton {
+        case difficultyButton:
+            let chosenDifficulty = itemsToPopulatePickerTableView[indexPath.row]
+            UserDefaultsDataManager.shared.saveDifficulty(difficulty: chosenDifficulty)
+            CardGameSettings.shared.setDifficulty(difficulty: chosenDifficulty)
+            checkGameDifficulty()
+        case timerButton:
+            let chosenTimerSettings = itemsToPopulatePickerTableView[indexPath.row]
+            if chosenTimerSettings == "Yes" {
+                CardGameSettings.shared.setGameTimer(state: true)
+            } else {
+                CardGameSettings.shared.setGameTimer(state: false)
+            }
+            checkGameTimerState()
+        default:
+            break
+        }
         delegate?.updateCards()
+        removeTransparentView()
     }
 }

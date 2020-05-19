@@ -11,7 +11,6 @@ import UIKit
 class CheckMatchingCards {
     
     func checkForMatch(cardsSymbolArray: [String]) -> Bool {
-        
         let firstCard = cardsSymbolArray[0]
         let count = cardsSymbolArray.count - 1
         

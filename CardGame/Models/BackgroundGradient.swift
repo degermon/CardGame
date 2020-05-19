@@ -12,6 +12,7 @@ class BackgroundGradient {
     
     private let gradientLayer = CAGradientLayer()
 
+    //set a gradient background with two colors
     func setBackground(for view: UIView, color1: CGColor, color2: CGColor, animate: Bool) {
         
         gradientLayer.frame = view.bounds

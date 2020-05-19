@@ -14,11 +14,15 @@ class MainViewController: UIViewController, SettingsVCDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var highscoreLabel: UILabel!
+    @IBOutlet weak var timerLabel: UILabel!
     
     // MARK: - Variables
     
     let cellIdentifier = "CardCollectionViewCell"
     var symbolsForGame: [String] = []
+    var timerLaunched = false
+    var gameTimerState = false
+    let timerClass = TimerClass()
     private let backgroundGradient = BackgroundGradient()
     private let collectionViewConfig = CollectionViewLayoutConfig()
     private let checkMatchingCards = CheckMatchingCards()
@@ -33,7 +37,6 @@ class MainViewController: UIViewController, SettingsVCDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkGameDifficulty()
         setupCollectionView()
         loadCardSymbols()
         settingsChanged() // set/load all on first launch
@@ -48,6 +51,22 @@ class MainViewController: UIViewController, SettingsVCDelegate {
         currentGameDifficulty = CardGameSettings.shared.checkDifficulty()
     }
     
+    private func checkGameTimerState() {
+        gameTimerState = CardGameSettings.shared.getGameTimerState()
+        if gameTimerState {
+            timerLabel.isHidden = false
+        } else {
+            timerLabel.isHidden = true
+        }
+    }
+    
+    private func resetTimer() {
+        timerLaunched = false
+        timerClass.stopTimer()
+        timerClass.setTimerFor(time: 60, showResultIn: timerLabel)
+        timerLabel.text = "60 seconds left"
+    }
+    
     private func loadCardSymbols() {
         symbolsForGame = CardSymbols.shared.getSymbols(difficulty: currentGameDifficulty)
     }
@@ -60,12 +79,14 @@ class MainViewController: UIViewController, SettingsVCDelegate {
         collectionView.reloadData()
         cardsTappedCellArray = []
         cardsTappedSymbolArray = []
+        loadCardSymbols()
+        resetTimer()
     }
     
     private func settingsChanged() {
         checkGameDifficulty()
+        checkGameTimerState()
         updateColelctionViewLayout()
-        loadCardSymbols()
         newGame()
     }
     
@@ -91,14 +112,17 @@ class MainViewController: UIViewController, SettingsVCDelegate {
         switch currentGameDifficulty {
         case "Easy":
             if cardPairsMatched == 8 {
+                timerClass.stopTimer()
                 showEndgameAlert()
             }
         case "Normal":
             if cardPairsMatched == 5 {
+                timerClass.stopTimer()
                 showEndgameAlert()
             }
         case "Hard":
             if cardPairsMatched == 6 {
+                timerClass.stopTimer()
                 showEndgameAlert()
             }
         default:
@@ -219,6 +243,8 @@ class MainViewController: UIViewController, SettingsVCDelegate {
     // MARK: - Actions
 
     @IBAction func settingsButtonTapped(_ sender: Any) {
+        timerClass.stopTimer()
+        timerLaunched = false
         performSegue(withIdentifier: "showSettings", sender: sender)
     }
     

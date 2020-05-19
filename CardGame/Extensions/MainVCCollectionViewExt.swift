@@ -9,6 +9,7 @@
 import UIKit
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return symbolsForGame.count
     }
@@ -22,6 +23,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         configureCellDefaultState(cell: cell)
         cell.buttonAction = { [unowned self] in
             self.configureClickedCellState(cell: cell, for: indexPath)
+            if self.timerLaunched == false && self.gameTimerState == true {
+                self.timerClass.startTimer {
+                    self.showEndgameAlert()
+                }
+                self.timerLaunched = true
+            }
         }
         
         return cell

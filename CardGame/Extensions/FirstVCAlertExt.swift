@@ -9,6 +9,7 @@
 import UIKit
 
 extension FirstViewController {
+    
     func displayDifficultyAlert() {
         let alert = UIAlertController(title: "", message: "Choose your difficuly:", preferredStyle: .alert)
         
